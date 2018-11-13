@@ -2,8 +2,8 @@ from django.db.models import Q
 from django.views.decorators.http import require_POST
 
 from core import validate_schema, SuccessResponse
-from errors import UserExist
-from users.auth import generate_password_salt, generate_password_hash, get_token
+from errors import UserExist, WrongUsernameOrPassword
+from users.auth import generate_password_salt, generate_password_hash, get_token, check_password
 from users.models import UserTab
 
 EMAIL_REGEX = '^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$'
@@ -33,13 +33,43 @@ def signup(request, args):
 	# Create new user
 	password_salt = generate_password_salt()
 	password_hash = generate_password_hash(password, password_salt)
-	user = UserTab.objects.create(email=email, username=username, password_salt=password_salt, password_hash=password_hash)
-
-	print user.pk
-	print user.username
-	print user.password_hash
+	user = UserTab.objects.create(email=email, username=username, password_salt=password_salt,
+	                              password_hash=password_hash)
 
 	return SuccessResponse({
 		'id': user.id,
 		'token': get_token(user)
+	})
+
+
+login_schema = {
+	'type': 'object',
+	'properties': {
+		'username': {'type': 'string', 'minLength': 6, 'maxLength': 20, 'pattern': '^\w+$'},
+		'password': {'type': 'string', 'minLength': 8, 'maxLength': 30}
+	},
+	'required': ['username', 'password']
+}
+
+
+@require_POST
+@validate_schema(login_schema)
+def login(request, args):
+	username = args.get('username')
+	password = args.get('password')
+	try:
+		user = UserTab.objects.get(username=username)
+	except UserTab.DoesNotExist:
+		raise WrongUsernameOrPassword()
+	if not check_password(password, user.password_salt, user.password_hash):
+		raise WrongUsernameOrPassword()
+
+	return SuccessResponse({
+		'token': get_token(user),
+		'id': user.id,
+		'email': user.email,
+		'username': user.username,
+		'avatar_path': user.avatar_path,
+		'full_name': user.fullname,
+		'role': user.role
 	})
