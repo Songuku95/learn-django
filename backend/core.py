@@ -1,16 +1,31 @@
 import json
+import time
 from functools import wraps
 
-from django.http import JsonResponse, HttpResponse
+from django.db import models
+from django.http import JsonResponse
 from django.utils.deprecation import MiddlewareMixin
 from jsonschema import validate, ValidationError
 
-from enums import ErrorCode
+from enums import ErrorCodes
+from errors import ErrorSchema, ServerError, InavlidRequestParams
 
 
-class RequestParamsException(Exception):
-	def __init__(self, message):
-		self.message = message
+# Reference: https://stackoverflow.com/questions/1737017/django-auto-now-and-auto-now-add
+class Model(models.Model):
+	created_at = models.PositiveIntegerField(editable=False)
+	updated_at = models.PositiveIntegerField()
+
+	def save(self, *args, **kwargs):
+		# On saves, update timestamps
+		now = int(time.time())
+		if not self.id:
+			self.created_at = now
+		self.updated_at = now
+		return super(Model, self).save(*args, **kwargs)
+
+	class Meta:
+		abstract = True
 
 
 class SuccessResponse(JsonResponse):
@@ -25,20 +40,18 @@ class SuccessResponse(JsonResponse):
 
 
 class ErrorResponse(JsonResponse):
-	error_code = ''
-	error_message = ''
-
-	def __init__(self):
+	def __init__(self, data):
 		response = {
 			'result': 'error',
-			'error_code': self.error_code,
-			'error_message': self.error_message
+			'error_code': data.error_code,
+			'error_message': data.error_message
 		}
+
 		super(ErrorResponse, self).__init__(response)
 
 
 class RequestParamsError(ErrorResponse):
-	error_code = ErrorCode.INVALID_REQUEST_PARAMETERS
+	error_code = ErrorCodes.INVALID_REQUEST_PARAMETERS
 
 	def __init__(self, message):
 		self.error_message = message
@@ -47,17 +60,17 @@ class RequestParamsError(ErrorResponse):
 
 class ExceptionMiddleware(MiddlewareMixin):
 	def process_exception(self, request, exception):
-		if isinstance(exception, RequestParamsException):
-			return RequestParamsError(exception.message)
-		return HttpResponse("in exception")
+		if isinstance(exception, ErrorSchema):
+			return ErrorResponse(exception)
+		# print exception
+		# TODO: log to file
+		# return ErrorResponse(ServerError())
 
 
-def parse_args_with(schema):
-	def parse_args_with_decorator(f):
+def validate_schema(schema):
+	def validate_schema_decorator(f):
 		@wraps(f)
 		def wrapper_func(request, *args, **kwargs):
-			request_args = {}
-
 			# There are only 2 request methods (GET, POST) because we use require_POST, require_safe in all API
 			if request.method == 'GET':
 				request_args = request.GET.dict()
@@ -67,11 +80,11 @@ def parse_args_with(schema):
 			try:
 				validate(request_args, schema)
 			except ValidationError as error:
-				raise RequestParamsException(error.message)
+				raise InavlidRequestParams(error.message)
 
 			kwargs['args'] = request_args
 			return f(request, *args, **kwargs)
 
 		return wrapper_func
 
-	return parse_args_with_decorator
+	return validate_schema_decorator
