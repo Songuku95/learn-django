@@ -11,6 +11,8 @@ class UserTab(models.Model):
 	username = models.CharField(max_length=20)
 	fullname = models.CharField(max_length=20)
 	sex = models.SmallIntegerField()
+	email = models.CharField(max_length=50)
+	avatar_path = models.CharField(max_length=100)
 	role = models.SmallIntegerField()
 	password_hash = models.CharField(max_length=200)
 	password_salt = models.CharField(max_length=200)
