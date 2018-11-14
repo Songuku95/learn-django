@@ -3,9 +3,12 @@
   <component name="ChangeListManager">
     <list default="true" id="f5584fc0-3512-46ca-8f9e-9dce55291464" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/core.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/core.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/enums.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/enums.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/errors.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/errors.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/users/api.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/users/api.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/users/auth.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/users/auth.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/users/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/users/models.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/users/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/users/urls.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -28,22 +31,26 @@
     <expand />
     <select />
   </component>
+  <component name="DjangoConsoleOptions" custom-start-script="import sys; print('Python %s on %s' % (sys.version, sys.platform))&#10;import django; print('Django %s' % django.get_version())&#10;sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;if 'setup' in dir(django): django.setup()&#10;import django_manage_shell; django_manage_shell.run(PROJECT_ROOT)">
+    <option name="myCustomStartScript" value="import sys; print('Python %s on %s' % (sys.version, sys.platform))&#10;import django; print('Django %s' % django.get_version())&#10;sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;if 'setup' in dir(django): django.setup()&#10;import django_manage_shell; django_manage_shell.run(PROJECT_ROOT)" />
+  </component>
   <component name="FUSProjectUsageTrigger">
     <session id="-2026474890">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="4" />
+          <entry key="project.closed" value="5" />
           <entry key="project.open.time.0" value="3" />
-          <entry key="project.open.time.1" value="1" />
+          <entry key="project.open.time.1" value="2" />
+          <entry key="project.open.time.3" value="1" />
           <entry key="project.open.time.7" value="1" />
-          <entry key="project.opened" value="5" />
+          <entry key="project.opened" value="7" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
           <entry key="gitignore" value="2" />
           <entry key="md" value="4" />
-          <entry key="py" value="51" />
+          <entry key="py" value="54" />
           <entry key="pyi" value="1" />
           <entry key="txt" value="2" />
         </counts>
@@ -52,7 +59,7 @@
         <counts>
           <entry key="Markdown" value="4" />
           <entry key="PLAIN_TEXT" value="4" />
-          <entry key="Python" value="51" />
+          <entry key="Python" value="54" />
           <entry key="PythonStub" value="1" />
         </counts>
       </usages-collector>
@@ -61,7 +68,7 @@
           <entry key="dummy" value="1" />
           <entry key="gitignore" value="32" />
           <entry key="md" value="721" />
-          <entry key="py" value="9687" />
+          <entry key="py" value="11724" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
@@ -69,7 +76,7 @@
           <entry key="CommandLine" value="6" />
           <entry key="Markdown" value="683" />
           <entry key="PLAIN_TEXT" value="33" />
-          <entry key="Python" value="9687" />
+          <entry key="Python" value="11724" />
           <entry key="SQL" value="32" />
         </counts>
       </usages-collector>
@@ -80,31 +87,13 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/backend/configurations/urls.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="240">
-              <caret line="16" lean-forward="true" selection-start-line="16" selection-end-line="16" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/backend/configurations/settings.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="210">
-              <caret line="14" column="58" lean-forward="true" selection-start-line="14" selection-start-column="58" selection-end-line="14" selection-end-column="58" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/backend/users/models.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="360">
-              <caret line="24" lean-forward="true" selection-start-line="24" selection-end-line="24" />
+            <state relative-caret-position="60">
+              <caret line="9" column="6" selection-start-line="9" selection-start-column="6" selection-end-line="9" selection-end-column="6" />
               <folding>
                 <element signature="e#24#63#0" expanded="true" />
-                <marker date="1542100561319" expanded="true" signature="577:604" ph="..." />
+                <marker date="1542107845498" expanded="true" signature="574:601" ph="..." />
               </folding>
             </state>
           </provider>
@@ -113,8 +102,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/backend/users/urls.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="120">
-              <caret line="8" lean-forward="true" selection-start-line="8" selection-end-line="8" />
+            <state relative-caret-position="105">
+              <caret line="9" selection-start-line="9" selection-end-line="9" />
               <folding>
                 <element signature="e#0#32#0" expanded="true" />
               </folding>
@@ -122,21 +111,26 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/backend/core.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="675">
-              <caret line="45" column="42" lean-forward="true" selection-start-line="45" selection-start-column="42" selection-end-line="45" selection-end-column="42" />
+            <state relative-caret-position="348">
+              <caret line="95" column="33" selection-start-line="95" selection-start-column="33" selection-end-line="95" selection-end-column="33" />
               <folding>
                 <element signature="e#0#11#0" expanded="true" />
-                <marker date="1542100561319" expanded="true" signature="435:781" ph="..." />
-                <marker date="1542100561319" expanded="true" signature="572:575" ph="..." />
-                <marker date="1542100561319" expanded="true" signature="779:781" ph="..." />
-                <marker date="1542100561319" expanded="true" signature="817:1036" ph="..." />
-                <marker date="1542100561319" expanded="true" signature="1465:1467" ph="..." />
-                <marker date="1542100561319" expanded="true" signature="1720:1721" ph="..." />
-                <marker date="1542100561319" expanded="true" signature="1749:1750" ph="..." />
-                <marker date="1542100561319" expanded="true" signature="1749:1751" ph="..." />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/backend/enums.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="135">
+              <caret line="9" selection-start-line="9" selection-end-line="9" />
+              <folding>
+                <marker date="1542162830731" expanded="true" signature="153:155" ph="..." />
+                <marker date="1542162830731" expanded="true" signature="174:297" ph="..." />
               </folding>
             </state>
           </provider>
@@ -145,30 +139,43 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/backend/errors.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="135">
-              <caret line="9" column="22" lean-forward="true" selection-start-line="9" selection-start-column="22" selection-end-line="9" selection-end-column="22" />
+            <state relative-caret-position="225">
+              <caret line="15" column="39" selection-start-line="15" selection-start-column="39" selection-end-line="15" selection-end-column="39" />
               <folding>
-                <marker date="1542103982856" expanded="true" signature="17:205" ph="..." />
-                <marker date="1542103982856" expanded="true" signature="305:346" ph="..." />
-                <marker date="1542103982856" expanded="true" signature="532:534" ph="..." />
-                <marker date="1542103982856" expanded="true" signature="614:616" ph="..." />
+                <marker date="1542109285351" expanded="true" signature="448:488" ph="..." />
+                <marker date="1542109285351" expanded="true" signature="844:846" ph="..." />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/backend/users/auth.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="180">
-              <caret line="12" lean-forward="true" selection-start-line="12" selection-end-line="12" />
+            <state relative-caret-position="360">
+              <caret line="24" column="69" selection-start-line="24" selection-start-column="69" selection-end-line="24" selection-end-column="69" />
               <folding>
                 <element signature="e#0#15#0" expanded="true" />
-                <marker date="1542106953394" expanded="true" signature="700:702" ph="..." />
-                <marker date="1542106953394" expanded="true" signature="1113:1270" ph="..." />
-                <marker date="1542106953394" expanded="true" signature="1290:1292" ph="..." />
-                <marker date="1542106953394" expanded="true" signature="1489:1491" ph="..." />
+                <marker date="1542164147113" expanded="true" signature="434:435" ph="..." />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$USER_HOME$/.virtualenvs/social_event/local/lib/python2.7/site-packages/jwt/exceptions.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state>
+              <caret column="6" selection-start-column="6" selection-end-column="6" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$USER_HOME$/.virtualenvs/social_event/local/lib/python2.7/site-packages/jwt/api_jwt.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="960">
+              <caret line="68" column="8" selection-start-line="68" selection-start-column="8" selection-end-line="68" selection-end-column="8" />
             </state>
           </provider>
         </entry>
@@ -176,17 +183,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file:///usr/lib/python2.7/string.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="366">
+            <state relative-caret-position="495">
               <caret line="33" column="9" selection-start-line="33" selection-end-line="33" selection-end-column="9" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$USER_HOME$/.virtualenvs/social_event/local/lib/python2.7/site-packages/bcrypt/__init__.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="351">
-              <caret line="93" column="39" lean-forward="true" selection-start-line="93" selection-start-column="39" selection-end-line="93" selection-end-column="39" />
             </state>
           </provider>
         </entry>
@@ -194,12 +192,13 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/backend/users/api.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="315">
-              <caret line="21" column="13" lean-forward="true" selection-start-line="21" selection-start-column="13" selection-end-line="21" selection-end-column="13" />
+            <state relative-caret-position="543">
+              <caret line="81" column="19" lean-forward="true" selection-start-line="81" selection-start-column="19" selection-end-line="81" selection-end-column="19" />
               <folding>
                 <element signature="e#0#30#0" expanded="true" />
-                <marker date="1542104285081" expanded="true" signature="990:992" ph="..." />
-                <marker date="1542104285081" expanded="true" signature="1837:2022" ph="..." />
+                <marker date="1542164104314" expanded="true" signature="1027:1029" ph="..." />
+                <marker date="1542164104314" expanded="true" signature="1874:2059" ph="..." />
+                <marker date="1542164104314" expanded="true" signature="2736:2738" ph="..." />
               </folding>
             </state>
           </provider>
@@ -230,14 +229,16 @@
       <find>RequestParamsException</find>
       <find>pyc</find>
       <find>exact</find>
-      <find>ErrorCode</find>
       <find>UserRole</find>
       <find>ErrorCodes</find>
       <find>app_label</find>
+      <find>ErrorCode</find>
+      <find>UserRoles</find>
     </findStrings>
     <replaceStrings>
       <replace>\</replace>
       <replace>ErrorCodes</replace>
+      <replace>UserRole</replace>
     </replaceStrings>
   </component>
   <component name="Git.Settings">
@@ -258,12 +259,12 @@
         <option value="$PROJECT_DIR$/backend/users/errors.py" />
         <option value="$PROJECT_DIR$/.gitignore" />
         <option value="$PROJECT_DIR$/backend/configurations/settings.py" />
-        <option value="$PROJECT_DIR$/backend/core.py" />
-        <option value="$PROJECT_DIR$/backend/enums.py" />
         <option value="$PROJECT_DIR$/backend/users/models.py" />
         <option value="$PROJECT_DIR$/backend/errors.py" />
-        <option value="$PROJECT_DIR$/backend/users/api.py" />
         <option value="$PROJECT_DIR$/backend/users/urls.py" />
+        <option value="$PROJECT_DIR$/backend/enums.py" />
+        <option value="$PROJECT_DIR$/backend/core.py" />
+        <option value="$PROJECT_DIR$/backend/users/api.py" />
         <option value="$PROJECT_DIR$/backend/users/auth.py" />
       </list>
     </option>
@@ -285,7 +286,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -304,16 +304,11 @@
               <item name="backend" type="462c0819:PsiDirectoryNode" />
               <item name="configurations" type="462c0819:PsiDirectoryNode" />
             </path>
-            <path>
-              <item name="social-event" type="b2602c69:ProjectViewProjectNode" />
-              <item name="social-event" type="462c0819:PsiDirectoryNode" />
-              <item name="backend" type="462c0819:PsiDirectoryNode" />
-              <item name="users" type="462c0819:PsiDirectoryNode" />
-            </path>
           </expand>
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -321,7 +316,7 @@
     <property name="last_opened_file_path" value="$PROJECT_DIR$/backend/configurations" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
-    <property name="settings.editor.selected.configurable" value="com.jetbrains.django.DjangoModulesConfigurable" />
+    <property name="settings.editor.selected.configurable" value="preferences.editor" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
@@ -357,7 +352,7 @@
     <frame x="67" y="25" width="1853" height="1055" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.26065302" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.26674044" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -411,7 +406,6 @@
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/requirements.txt" />
-    <entry file="file://$PROJECT_DIR$/backend/enums.py" />
     <entry file="file://$PROJECT_DIR$/backend/__init__.py" />
     <entry file="file://$PROJECT_DIR$/TASK.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
@@ -467,16 +461,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="435">
           <caret line="29" column="15" lean-forward="true" selection-start-line="29" selection-start-column="15" selection-end-line="29" selection-end-column="15" />
-          <folding>
-            <element signature="e#24#80#0" expanded="true" />
-            <marker date="1542100561319" expanded="true" signature="194:196" ph="..." />
-            <marker date="1542100561319" expanded="true" signature="754:756" ph="..." />
-            <marker date="1542100561319" expanded="true" signature="1131:1133" ph="..." />
-            <marker date="1542100561319" expanded="true" signature="1697:1699" ph="..." />
-            <marker date="1542100561319" expanded="true" signature="2083:2085" ph="..." />
-            <marker date="1542100561319" expanded="true" signature="2321:2323" ph="..." />
-            <marker date="1542100561319" expanded="true" signature="2490:2492" ph="..." />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -535,13 +519,7 @@
     <entry file="file://$PROJECT_DIR$/backend/configurations/__init__.py">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/backend/error.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="7" column="42" lean-forward="true" selection-start-line="7" selection-start-column="42" selection-end-line="7" selection-end-column="42" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/backend/error.py" />
     <entry file="file://$USER_HOME$/.virtualenvs/social_event/local/lib/python2.7/site-packages/django/http/response.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="5880">
@@ -570,121 +548,121 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/backend/enums.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="30">
-          <caret line="2" column="38" lean-forward="true" selection-start-line="2" selection-start-column="38" selection-end-line="2" selection-end-column="38" />
-          <folding>
-            <marker date="1542100561319" expanded="true" signature="17:18" ph="..." />
-            <marker date="1542100561319" expanded="true" signature="17:19" ph="..." />
-            <marker date="1542100561319" expanded="true" signature="131:133" ph="..." />
-            <marker date="1542100561319" expanded="true" signature="167:169" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/backend/configurations/urls.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="240">
-          <caret line="16" lean-forward="true" selection-start-line="16" selection-end-line="16" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/.virtualenvs/social_event/local/lib/python2.7/site-packages/bcrypt/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="351">
-          <caret line="93" column="39" lean-forward="true" selection-start-line="93" selection-start-column="39" selection-end-line="93" selection-end-column="39" />
+          <caret line="16" selection-start-line="16" selection-end-line="16" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/backend/configurations/settings.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="210">
-          <caret line="14" column="58" lean-forward="true" selection-start-line="14" selection-start-column="58" selection-end-line="14" selection-end-column="58" />
+          <caret line="14" column="58" selection-start-line="14" selection-start-column="58" selection-end-line="14" selection-end-column="58" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/.virtualenvs/social_event/local/lib/python2.7/site-packages/bcrypt/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1185">
+          <caret line="93" column="39" selection-start-line="93" selection-start-column="39" selection-end-line="93" selection-end-column="39" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/backend/users/models.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="360">
-          <caret line="24" lean-forward="true" selection-start-line="24" selection-end-line="24" />
+        <state relative-caret-position="60">
+          <caret line="9" column="6" selection-start-line="9" selection-start-column="6" selection-end-line="9" selection-end-column="6" />
           <folding>
             <element signature="e#24#63#0" expanded="true" />
-            <marker date="1542100561319" expanded="true" signature="577:604" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/backend/users/api.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="315">
-          <caret line="21" column="13" lean-forward="true" selection-start-line="21" selection-start-column="13" selection-end-line="21" selection-end-column="13" />
-          <folding>
-            <element signature="e#0#30#0" expanded="true" />
-            <marker date="1542104285081" expanded="true" signature="990:992" ph="..." />
-            <marker date="1542104285081" expanded="true" signature="1837:2022" ph="..." />
+            <marker date="1542107845498" expanded="true" signature="574:601" ph="..." />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/backend/users/urls.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="8" lean-forward="true" selection-start-line="8" selection-end-line="8" />
+        <state relative-caret-position="105">
+          <caret line="9" selection-start-line="9" selection-end-line="9" />
           <folding>
             <element signature="e#0#32#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/backend/core.py">
+    <entry file="file://$PROJECT_DIR$/backend/enums.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="675">
-          <caret line="45" column="42" lean-forward="true" selection-start-line="45" selection-start-column="42" selection-end-line="45" selection-end-column="42" />
+        <state relative-caret-position="135">
+          <caret line="9" selection-start-line="9" selection-end-line="9" />
           <folding>
-            <element signature="e#0#11#0" expanded="true" />
-            <marker date="1542100561319" expanded="true" signature="435:781" ph="..." />
-            <marker date="1542100561319" expanded="true" signature="572:575" ph="..." />
-            <marker date="1542100561319" expanded="true" signature="779:781" ph="..." />
-            <marker date="1542100561319" expanded="true" signature="817:1036" ph="..." />
-            <marker date="1542100561319" expanded="true" signature="1465:1467" ph="..." />
-            <marker date="1542100561319" expanded="true" signature="1720:1721" ph="..." />
-            <marker date="1542100561319" expanded="true" signature="1749:1750" ph="..." />
-            <marker date="1542100561319" expanded="true" signature="1749:1751" ph="..." />
+            <marker date="1542162830731" expanded="true" signature="153:155" ph="..." />
+            <marker date="1542162830731" expanded="true" signature="174:297" ph="..." />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/backend/errors.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="135">
-          <caret line="9" column="22" lean-forward="true" selection-start-line="9" selection-start-column="22" selection-end-line="9" selection-end-column="22" />
+        <state relative-caret-position="225">
+          <caret line="15" column="39" selection-start-line="15" selection-start-column="39" selection-end-line="15" selection-end-column="39" />
           <folding>
-            <marker date="1542103982856" expanded="true" signature="17:205" ph="..." />
-            <marker date="1542103982856" expanded="true" signature="305:346" ph="..." />
-            <marker date="1542103982856" expanded="true" signature="532:534" ph="..." />
-            <marker date="1542103982856" expanded="true" signature="614:616" ph="..." />
+            <marker date="1542109285351" expanded="true" signature="448:488" ph="..." />
+            <marker date="1542109285351" expanded="true" signature="844:846" ph="..." />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/.virtualenvs/social_event/local/lib/python2.7/site-packages/jwt/exceptions.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="6" selection-start-column="6" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/.virtualenvs/social_event/local/lib/python2.7/site-packages/jwt/api_jwt.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="960">
+          <caret line="68" column="8" selection-start-line="68" selection-start-column="8" selection-end-line="68" selection-end-column="8" />
         </state>
       </provider>
     </entry>
     <entry file="file:///usr/lib/python2.7/string.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="366">
+        <state relative-caret-position="495">
           <caret line="33" column="9" selection-start-line="33" selection-end-line="33" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/backend/users/api.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="543">
+          <caret line="81" column="19" lean-forward="true" selection-start-line="81" selection-start-column="19" selection-end-line="81" selection-end-column="19" />
+          <folding>
+            <element signature="e#0#30#0" expanded="true" />
+            <marker date="1542164104314" expanded="true" signature="1027:1029" ph="..." />
+            <marker date="1542164104314" expanded="true" signature="1874:2059" ph="..." />
+            <marker date="1542164104314" expanded="true" signature="2736:2738" ph="..." />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/backend/users/auth.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="12" lean-forward="true" selection-start-line="12" selection-end-line="12" />
+        <state relative-caret-position="360">
+          <caret line="24" column="69" selection-start-line="24" selection-start-column="69" selection-end-line="24" selection-end-column="69" />
           <folding>
             <element signature="e#0#15#0" expanded="true" />
-            <marker date="1542106953394" expanded="true" signature="700:702" ph="..." />
-            <marker date="1542106953394" expanded="true" signature="1113:1270" ph="..." />
-            <marker date="1542106953394" expanded="true" signature="1290:1292" ph="..." />
-            <marker date="1542106953394" expanded="true" signature="1489:1491" ph="..." />
+            <marker date="1542164147113" expanded="true" signature="434:435" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/backend/core.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="348">
+          <caret line="95" column="33" selection-start-line="95" selection-start-column="33" selection-end-line="95" selection-end-column="33" />
+          <folding>
+            <element signature="e#0#11#0" expanded="true" />
           </folding>
         </state>
       </provider>

@@ -1,10 +1,12 @@
 from django.db.models import Q
 from django.views.decorators.http import require_POST
 
-from core import validate_schema, SuccessResponse
+from core import validate_schema, SuccessResponse, require_auth
 from errors import UserExist, WrongUsernameOrPassword
 from users.auth import generate_password_salt, generate_password_hash, get_token, check_password
 from users.models import UserTab
+
+from enums import Sex
 
 EMAIL_REGEX = '^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$'
 
@@ -73,3 +75,23 @@ def login(request, args):
 		'full_name': user.fullname,
 		'role': user.role
 	})
+
+
+update_profile_schema = {
+	'type': 'object',
+	'properties': {
+		'fullname': {'type': 'string', 'maxLength': 30},
+		'sex': {'type': 'integer', 'enum': [Sex.MALE, Sex.FEMALE]},
+		'avatar_path': {'type': 'string', 'maxLength': 100}
+	}
+}
+
+
+@require_POST
+@require_auth('member')
+@validate_schema(update_profile_schema)
+def update_profile(request, user, args):
+	for key, value in args.iteritems():
+		setattr(user, key, value)
+	user.save()
+	return SuccessResponse({})
