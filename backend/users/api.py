@@ -1,12 +1,11 @@
 from django.db.models import Q
-from django.views.decorators.http import require_POST
+from django.views.decorators.http import require_POST, require_safe
 
 from core import validate_schema, SuccessResponse, require_auth
+from enums import Sex
 from errors import UserExist, WrongUsernameOrPassword
 from users.auth import generate_password_salt, generate_password_hash, get_token, check_password
 from users.models import UserTab
-
-from enums import Sex
 
 EMAIL_REGEX = '^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$'
 
@@ -95,3 +94,17 @@ def update_profile(request, user, args):
 		setattr(user, key, value)
 	user.save()
 	return SuccessResponse({})
+
+
+@require_safe
+@require_auth('member')
+def get_profile(request, user):
+	return SuccessResponse({
+		'id': user.id,
+		'email': user.email,
+		'username': user.username,
+		'avatar_path': user.avatar_path,
+		'fullname': user.fullname,
+		'role': user.role,
+		'sex': user.sex
+	})

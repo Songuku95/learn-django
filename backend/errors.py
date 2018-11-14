@@ -5,6 +5,7 @@ class ErrorCode:
 	WRONG_USERNAME_OR_PASSWORD = 'Wrong username or password'
 	UNAUTHORIZED = 'Unauthorized'
 	PERMISSION_DENIED = 'Permission denied'
+	FILE_TOO_LARGE = 'File too large'
 
 
 class ErrorSchema(Exception):
@@ -37,3 +38,7 @@ class WrongUsernameOrPassword(ErrorSchema):
 
 class PermissionDenied(ErrorSchema):
 	error_code = ErrorCode.PERMISSION_DENIED
+
+
+class FileTooLarge(ErrorSchema):
+	error_code = ErrorCode.FILE_TOO_LARGE
