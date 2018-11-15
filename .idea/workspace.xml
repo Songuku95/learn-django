@@ -1,22 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="f5584fc0-3512-46ca-8f9e-9dce55291464" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/backend/events/comment_api.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/events/event_api.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/events/like_api.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/events/participant_api.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/events/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/configurations/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/configurations/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/core.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/core.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/enums.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/enums.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/errors.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/errors.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/events/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/events/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/helper/upload.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/helper/upload.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/users/api.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/users/api.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/users/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/users/urls.py" afterDir="false" />
-    </list>
+    <list default="true" id="f5584fc0-3512-46ca-8f9e-9dce55291464" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -120,8 +105,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/backend/users/auth.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="615">
-              <caret line="41" column="32" selection-start-line="41" selection-start-column="32" selection-end-line="41" selection-end-column="32" />
+            <state relative-caret-position="330">
+              <caret line="22" lean-forward="true" selection-start-line="22" selection-end-line="22" />
               <folding>
                 <element signature="e#0#15#0" expanded="true" />
                 <marker date="1542249207422" expanded="true" signature="434:435" ph="..." />
@@ -770,8 +755,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/backend/users/auth.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="615">
-          <caret line="41" column="32" selection-start-line="41" selection-start-column="32" selection-end-line="41" selection-end-column="32" />
+        <state relative-caret-position="330">
+          <caret line="22" lean-forward="true" selection-start-line="22" selection-end-line="22" />
           <folding>
             <element signature="e#0#15#0" expanded="true" />
             <marker date="1542249207422" expanded="true" signature="434:435" ph="..." />
