@@ -8,7 +8,7 @@ from django.utils.deprecation import MiddlewareMixin
 from jsonschema import validate, ValidationError
 
 from enums import ErrorCode, UserRole, UserRoleName
-from errors import ErrorSchema, ServerError, InavlidRequestParams, Unauthorized, PermissionDenied
+from errors import ErrorSchema, ServerError, InvalidRequestParams, Unauthorized, PermissionDenied
 from users.auth import decode_token
 
 
@@ -72,18 +72,18 @@ def require_auth(role):
 	def require_auth_decorator(f):
 		@wraps(f)
 		def wrapper_func(request, *args, **kwargs):
-			if role not in UserRoleName.get_list():
-				raise PermissionDenied()
-
 			token = request.META.get('HTTP_AUTHORIZATION')
 			if not token:
 				raise Unauthorized()
 
-			payload = decode_token(token, role)
-
 			# Admin can access API for member
 			if role == UserRoleName.ADMIN:
-				payload = payload or decode_token(token, UserRoleName.MEMBER)
+				payload = decode_token(token, UserRoleName.ADMIN)
+			elif role == UserRoleName.MEMBER:
+				payload = decode_token(token, UserRoleName.ADMIN) or decode_token(token, UserRoleName.MEMBER)
+			else:
+				raise PermissionDenied()
+
 			if not payload:
 				raise PermissionDenied()
 
@@ -114,7 +114,7 @@ def validate_schema(schema):
 			try:
 				validate(request_args, schema)
 			except ValidationError as error:
-				raise InavlidRequestParams(error.message)
+				raise InvalidRequestParams(error.message)
 
 			kwargs['args'] = request_args
 			return f(request, *args, **kwargs)

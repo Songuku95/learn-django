@@ -3,81 +3,100 @@ from __future__ import unicode_literals, absolute_import
 
 from django.db import models
 
+from core import Model
+from enums import CommonStatus
 
-class EventTab(models.Model):
-	id = models.PositiveIntegerField(primary_key=True)
-	created_at = models.PositiveIntegerField()
-	updated_at = models.PositiveIntegerField()
+
+class EventTab(Model):
 	user_id = models.PositiveIntegerField()
 	title = models.CharField(max_length=200)
 	description = models.CharField(max_length=10000)
 	start_date = models.PositiveIntegerField()
 	end_date = models.PositiveIntegerField()
-	location_name = models.CharField(max_length=200)
-	location_x = models.DecimalField(max_digits=11, decimal_places=8)
-	location_y = models.DecimalField(max_digits=11, decimal_places=8)
-	status = models.SmallIntegerField()
+	address = models.CharField(max_length=200)
+	latitude = models.DecimalField(max_digits=11, decimal_places=8)
+	longitude = models.DecimalField(max_digits=11, decimal_places=8)
+	status = models.SmallIntegerField(default=CommonStatus.ACTIVE)
+
+	class Meta:
+		db_table = 'event_tab'
+
+	def __unicode__(self):
+		return self.title
 
 
-class ImageTab(models.Model):
-	id = models.PositiveIntegerField(primary_key=True)
-	created_at = models.PositiveIntegerField()
-	updated_at = models.PositiveIntegerField()
+class ImageTab(Model):
 	path = models.CharField(max_length=100)
 	event_id = models.PositiveIntegerField()
-	status = models.SmallIntegerField()
+	status = models.SmallIntegerField(default=CommonStatus.ACTIVE)
 
 	class Meta:
 		indexes = [models.Index(fields=['event_id'], name='idx_event_id')]
+		db_table = 'image_tab'
+
+	def __unicode__(self):
+		return self.path
 
 
-class CommentTab(models.Model):
-	id = models.PositiveIntegerField(primary_key=True)
-	created_at = models.PositiveIntegerField()
-	updated_at = models.PositiveIntegerField()
+class CommentTab(Model):
 	event_id = models.PositiveIntegerField()
 	user_id = models.PositiveIntegerField()
 	content = models.CharField(max_length=10000)
-	status = models.SmallIntegerField()
+	status = models.SmallIntegerField(default=CommonStatus.ACTIVE)
 
 	class Meta:
 		indexes = [models.Index(fields=['event_id'], name='idx_event_id')]
+		db_table = 'comment_tab'
+
+	def __unicode__(self):
+		return self.content
 
 
-class EventLikerTab(models.Model):
-	id = models.PositiveIntegerField(primary_key=True)
-	created_at = models.PositiveIntegerField()
-	updated_at = models.PositiveIntegerField()
+class EventLikerTab(Model):
 	user_id = models.PositiveIntegerField()
 	event_id = models.PositiveIntegerField()
-	status = models.SmallIntegerField()
+	status = models.SmallIntegerField(default=CommonStatus.ACTIVE)
 
 	class Meta:
 		indexes = [models.Index(fields=['event_id'], name='idx_event_id')]
+		db_table = 'event_liker_tab'
+
+	def __unicode__(self):
+		return self.id
 
 
-class EventParticipantTab(models.Model):
-	id = models.PositiveIntegerField(primary_key=True)
-	created_at = models.PositiveIntegerField()
-	updated_at = models.PositiveIntegerField()
+class EventParticipantTab(Model):
 	user_id = models.PositiveIntegerField()
 	event_id = models.PositiveIntegerField()
-	status = models.CharField(max_length=10)
+	status = models.SmallIntegerField(default=CommonStatus.ACTIVE)
 
 	class Meta:
 		indexes = [models.Index(fields=['event_id'], name='idx_event_id')]
+		db_table = 'event_participant_tab'
+
+	def __unicode__(self):
+		return self.id
 
 
-class TagTab(models.Model):
-	id = models.PositiveIntegerField(primary_key=True)
+class TagTab(Model):
 	name = models.CharField(max_length=20)
 	idx_name = models.Index(fields=['name'])
 
+	class Meta:
+		indexes = [models.Index(fields=['name'], name='idx_name')]
+		db_table = 'tag_tab'
 
-class EventTagTab(models.Model):
-	id = models.PositiveIntegerField(primary_key=True)
+	def __unicode__(self):
+		return self.name
+
+
+class EventTagTab(Model):
 	tag_id = models.PositiveIntegerField()
 	event_id = models.PositiveIntegerField()
 
 	class Meta:
 		indexes = [models.Index(fields=['tag_id'], name='idx_tag_id')]
+		db_table = 'event_tag_tab'
+
+	def __unicode__(self):
+		return self.id

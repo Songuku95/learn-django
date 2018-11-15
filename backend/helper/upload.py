@@ -4,7 +4,7 @@ from django.core.files.storage import FileSystemStorage
 from django.views.decorators.http import require_POST
 
 from core import SuccessResponse, require_auth
-from errors import InavlidRequestParams, FileTooLarge
+from errors import InvalidRequestParams, FileTooLarge
 
 MAX_IMAGE_FILE_SIZE = 4 * 1024 * 1024
 
@@ -13,7 +13,7 @@ MAX_IMAGE_FILE_SIZE = 4 * 1024 * 1024
 @require_auth('member')
 def upload_image(request, user):
 	if not request.FILES.get('file'):
-		raise InavlidRequestParams()
+		raise InvalidRequestParams()
 	file = request.FILES.get('file')
 	if file.size > MAX_IMAGE_FILE_SIZE:
 		raise FileTooLarge

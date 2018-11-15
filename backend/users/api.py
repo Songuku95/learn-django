@@ -108,3 +108,27 @@ def get_profile(request, user):
 		'role': user.role,
 		'sex': user.sex
 	})
+
+
+get_user_list_schema = {
+	'type': 'object',
+	'properties': {
+		'ids': {
+			'type': 'array',
+			'items': {'type': 'integer', 'minimum': 1},
+			'uniqueItems': True,
+			'maxItems': 100
+		}
+	},
+	'required': ['ids']
+}
+
+@require_POST
+@require_auth('member')
+@validate_schema(get_user_list_schema)
+def get_list(request, user, args):
+	ids = args.get('ids')
+	users = UserTab.objects.filter(id__in=ids).values('id', 'username', 'fullname', 'avatar_path')
+	return SuccessResponse({
+		'events': list(users)
+	})

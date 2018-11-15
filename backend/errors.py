@@ -21,7 +21,7 @@ class Unauthorized(ErrorSchema):
 	error_code = ErrorCode.UNAUTHORIZED
 
 
-class InavlidRequestParams(ErrorSchema):
+class InvalidRequestParams(ErrorSchema):
 	error_code = ErrorCode.INVALID_REQUEST_PARAMETERS
 
 	def __init__(self, message):
