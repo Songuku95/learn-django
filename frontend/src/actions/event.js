@@ -21,9 +21,9 @@ export const getEventDetail = id => ({
   promise: post('/event/get_detail/', { id }),
 });
 
-export const searchEvent = () => ({
+export const searchEvent = data => ({
   type: EventAction.SEARCH,
-  promise: post('/event/get_ids/', {}),
+  promise: post('/event/get_ids/', data),
 });
 
 export const getEventList = ids => ({

@@ -9,6 +9,7 @@ import { uploadImage } from 'actions/user';
 import { API_ENDPOINT } from 'constants/common';
 
 import history from 'utils/history';
+import { formatDate } from 'utils/time';
 
 import Header from '../Header';
 
@@ -18,7 +19,7 @@ const MAX_SIZE = 4 * 1024 * 1024;
 export class Create extends React.Component {
   state = {
     imagePaths: [],
-    tag: '',
+    tags: '',
     title: '',
     description: '',
     address: '',
@@ -77,12 +78,20 @@ export class Create extends React.Component {
     });
   }
 
+  deleteImage = (index) => {
+    const imagePaths = [...this.state.imagePaths];
+    imagePaths.splice(index, 1);
+    this.setState({
+      imagePaths,
+    });
+  }
+
   submit = () => {
     const request = {
       ...this.state,
-      tags: this.state.tag.split(','),
-      startDate: this.state.startDate.unix(),
-      endDate: this.state.endDate.unix(),
+      tags: this.state.tags.split(','),
+      startDate: formatDate(this.state.startDate.unix()),
+      endDate: formatDate(this.state.endDate.unix()),
       latitude: parseFloat(this.state.latitude),
       longitude: parseFloat(this.state.longitude),
     };
@@ -140,10 +149,18 @@ export class Create extends React.Component {
         <input type="text" name="longitude" onChange={this.inputChange} value={this.state.longitude} />
         <br />
 
+        <b>Tags: </b>
+        <input type="text" name="tags" onChange={this.inputChange} value={this.state.tags} />
+        <br />
+
         <br />
         {
-          this.state.imagePaths.map(path => (
-            <img src={API_ENDPOINT + path} key={path} alt="" />
+          this.state.imagePaths.map((path, index) => (
+            <React.Fragment key={path}>
+              <img src={API_ENDPOINT + path} key={path} alt="" />
+              <button type="button" onClick={() => this.deleteImage(index)}> Delete </button>
+              <br />
+            </React.Fragment>
           ))
         }
         <br />

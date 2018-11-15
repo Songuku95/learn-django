@@ -12,6 +12,7 @@ const INITIAL_STATE = {
     endDate: '',
     latitude: 0,
     longitude: 0,
+    tags: [],
   },
 };
 

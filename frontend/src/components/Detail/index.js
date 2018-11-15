@@ -63,6 +63,10 @@ export class Detail extends React.Component {
         {event.longitude}
         <br />
 
+        <b>Tags: </b>
+        {event.tags.join(', ')}
+        <br />
+
         <br />
         {
           event.images.map(e => (
