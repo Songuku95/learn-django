@@ -211,6 +211,7 @@ def get_event_detail(request, args, user):
 		'description': event.description,
 		'start_date': event.start_date,
 		'end_date': event.end_date,
+		'address': event.address,
 		'latitude': event.latitude,
 		'longitude': event.longitude,
 		'tags': tag_names,

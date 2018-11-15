@@ -109,7 +109,10 @@ def validate_schema(schema):
 			if request.method == 'GET':
 				request_args = request.GET.dict()
 			else:
-				request_args = json.loads(request.body)
+				try:
+					request_args = json.loads(request.body)
+				except ValueError:
+					raise InvalidRequestParams('Wrong request format')
 
 			try:
 				validate(request_args, schema)

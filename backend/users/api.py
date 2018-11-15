@@ -1,5 +1,5 @@
 from django.db.models import Q
-from django.views.decorators.http import require_POST, require_safe
+from django.views.decorators.http import require_POST, require_safe, require_http_methods
 
 from core import validate_schema, SuccessResponse, require_auth
 from enums import Sex
@@ -13,7 +13,7 @@ signup_schema = {
 	'type': 'object',
 	'properties': {
 		'email': {'type': 'string', 'maxLength': 50, 'pattern': EMAIL_REGEX},
-		'username': {'type': 'string', 'minLength': 6, 'maxLength': 20, 'pattern': '^\w+$'},
+		'username': {'type': 'string', 'minLength': 6, 'maxLength': 20, 'pattern': '^\S*$'},
 		'password': {'type': 'string', 'minLength': 8, 'maxLength': 30}
 	},
 	'required': ['email', 'username', 'password']
@@ -46,7 +46,7 @@ def signup(request, args):
 login_schema = {
 	'type': 'object',
 	'properties': {
-		'username': {'type': 'string', 'minLength': 6, 'maxLength': 20, 'pattern': '^\w+$'},
+		'username': {'type': 'string', 'minLength': 6, 'maxLength': 20, 'pattern': '^\S*$'},
 		'password': {'type': 'string', 'minLength': 8, 'maxLength': 30}
 	},
 	'required': ['username', 'password']
@@ -122,6 +122,7 @@ get_user_list_schema = {
 	},
 	'required': ['ids']
 }
+
 
 @require_POST
 @require_auth('member')
