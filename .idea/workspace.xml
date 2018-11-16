@@ -3,13 +3,9 @@
   <component name="ChangeListManager">
     <list default="true" id="f5584fc0-3512-46ca-8f9e-9dce55291464" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/events/event_api.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/events/event_api.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/actions/event.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/actions/event.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/components/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/App.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/components/Create/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/Create/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/components/Detail/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/Detail/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/components/Home/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/Home/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/reducers/event.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/reducers/event.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/configurations/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/configurations/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/backend/requirements.txt" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -38,29 +34,30 @@
     <session id="-2026474890">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="6" />
+          <entry key="project.closed" value="7" />
           <entry key="project.open.time.0" value="3" />
           <entry key="project.open.time.1" value="2" />
           <entry key="project.open.time.3" value="1" />
+          <entry key="project.open.time.6" value="1" />
           <entry key="project.open.time.7" value="1" />
           <entry key="project.open.time.9" value="1" />
-          <entry key="project.opened" value="8" />
+          <entry key="project.opened" value="9" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
           <entry key="gitignore" value="3" />
-          <entry key="md" value="4" />
-          <entry key="py" value="87" />
+          <entry key="md" value="5" />
+          <entry key="py" value="89" />
           <entry key="pyi" value="1" />
-          <entry key="txt" value="2" />
+          <entry key="txt" value="3" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="Markdown" value="4" />
-          <entry key="PLAIN_TEXT" value="5" />
-          <entry key="Python" value="87" />
+          <entry key="Markdown" value="5" />
+          <entry key="PLAIN_TEXT" value="6" />
+          <entry key="Python" value="89" />
           <entry key="PythonStub" value="1" />
         </counts>
       </usages-collector>
@@ -68,17 +65,17 @@
         <counts>
           <entry key="dummy" value="12" />
           <entry key="gitignore" value="40" />
-          <entry key="md" value="721" />
-          <entry key="py" value="23500" />
+          <entry key="md" value="1289" />
+          <entry key="py" value="23501" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="CommandLine" value="6" />
-          <entry key="Markdown" value="683" />
+          <entry key="CommandLine" value="36" />
+          <entry key="Markdown" value="1220" />
           <entry key="PLAIN_TEXT" value="52" />
-          <entry key="Python" value="23500" />
-          <entry key="SQL" value="32" />
+          <entry key="Python" value="23501" />
+          <entry key="SQL" value="33" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.vcs.git.usages" />
@@ -88,61 +85,9 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/backend/users/models.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="360">
-              <caret line="24" selection-start-line="24" selection-end-line="24" />
-              <folding>
-                <element signature="e#24#63#0" expanded="true" />
-                <marker date="1542107845498" expanded="true" signature="574:601" ph="..." />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/backend/users/urls.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="165">
-              <caret line="11" selection-start-line="11" selection-end-line="11" />
-              <folding>
-                <element signature="e#0#32#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/backend/users/api.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="390">
-              <caret line="38" selection-start-line="38" selection-end-line="38" />
-              <folding>
-                <element signature="e#0#30#0" expanded="true" />
-                <marker date="1542274936524" expanded="true" signature="1062:1064" ph="..." />
-                <marker date="1542274936524" expanded="true" signature="1909:2094" ph="..." />
-                <marker date="1542274936524" expanded="true" signature="2771:2773" ph="..." />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/backend/users/views.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="135">
-              <caret line="9" selection-start-line="9" selection-end-line="9" />
-              <folding>
-                <element signature="e#24#63#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/backend/core.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1665">
+            <state relative-caret-position="1500">
               <caret line="111" column="20" selection-start-line="111" selection-start-column="20" selection-end-line="111" selection-end-column="20" />
               <folding>
                 <element signature="e#0#11#0" expanded="true" />
@@ -154,8 +99,42 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/backend/configurations/settings.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="453">
-              <caret line="104" column="1" selection-start-line="104" selection-start-column="1" selection-end-line="104" selection-end-column="1" />
+            <state relative-caret-position="180">
+              <caret line="12" column="9" lean-forward="true" selection-start-line="12" selection-start-column="9" selection-end-line="12" selection-end-column="9" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/README.md">
+          <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+            <state split_layout="SPLIT">
+              <first_editor relative-caret-position="315">
+                <caret line="54" column="42" selection-start-line="54" selection-start-column="42" selection-end-line="54" selection-end-column="42" />
+              </first_editor>
+              <second_editor />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/backend/requirements.txt">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="90">
+              <caret line="6" lean-forward="true" selection-start-line="6" selection-end-line="6" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/backend/events/models.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="45">
+              <caret line="21" column="10" selection-start-line="21" selection-start-column="10" selection-end-line="21" selection-end-column="10" />
+              <folding>
+                <element signature="e#24#80#0" expanded="true" />
+                <marker date="1542193953050" expanded="true" signature="2386:2387" ph="..." />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -173,11 +152,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/backend/events/event_api.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="221">
-              <caret line="191" lean-forward="true" selection-start-line="191" selection-end-line="191" />
+            <state relative-caret-position="671">
+              <caret line="221" column="17" lean-forward="true" selection-start-line="221" selection-start-column="17" selection-end-line="221" selection-end-column="17" />
               <folding>
                 <element signature="e#0#67#0" expanded="true" />
               </folding>
@@ -186,9 +165,18 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/backend/configurations/wsgi.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="210">
+              <caret line="16" lean-forward="true" selection-start-line="16" selection-end-line="16" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/backend/events/like_api.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="465">
+            <state relative-caret-position="390">
               <caret line="31" column="19" selection-start-line="31" selection-start-column="19" selection-end-line="31" selection-end-column="19" />
               <folding>
                 <element signature="e#0#53#0" expanded="true" />
@@ -200,7 +188,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/backend/events/comment_api.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1065">
+            <state relative-caret-position="975">
               <caret line="71" column="28" selection-start-line="71" selection-start-column="28" selection-end-line="71" selection-end-column="28" />
               <folding>
                 <element signature="e#0#53#0" expanded="true" />
@@ -220,8 +208,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>slash</find>
-      <find>CSRF_COOKIE_SECURE</find>
       <find>InvalidRequestInput`</find>
       <find>InvalidRequestInput</find>
       <find>ExceptionMiddleware</find>
@@ -250,6 +236,8 @@
       <find>decode</find>
       <find>json.load</find>
       <find>cors</find>
+      <find>STATIC_ROOT</find>
+      <find>birt</find>
     </findStrings>
     <replaceStrings>
       <replace>\</replace>
@@ -268,7 +256,6 @@
         <option value="$PROJECT_DIR$/TASK.md" />
         <option value="$PROJECT_DIR$/backend/enum.py" />
         <option value="$PROJECT_DIR$/backend/social_event/settings.py" />
-        <option value="$PROJECT_DIR$/README.md" />
         <option value="$PROJECT_DIR$/backend/manage.py" />
         <option value="$PROJECT_DIR$/backend/error.py" />
         <option value="$PROJECT_DIR$/backend/users/enums.py" />
@@ -278,7 +265,6 @@
         <option value="$PROJECT_DIR$/backend/helper/upload.py" />
         <option value="$PROJECT_DIR$/backend/configurations/urls.py" />
         <option value="$PROJECT_DIR$/backend/errors.py" />
-        <option value="$PROJECT_DIR$/backend/events/models.py" />
         <option value="$PROJECT_DIR$/backend/enums.py" />
         <option value="$PROJECT_DIR$/backend/events/like_api.py" />
         <option value="$PROJECT_DIR$/backend/events/comment_api.py" />
@@ -287,10 +273,12 @@
         <option value="$PROJECT_DIR$/backend/users/auth.py" />
         <option value="$PROJECT_DIR$/backend/users/views.py" />
         <option value="$PROJECT_DIR$/backend/users/urls.py" />
-        <option value="$PROJECT_DIR$/backend/configurations/settings.py" />
         <option value="$PROJECT_DIR$/backend/core.py" />
         <option value="$PROJECT_DIR$/backend/users/api.py" />
         <option value="$PROJECT_DIR$/backend/events/event_api.py" />
+        <option value="$PROJECT_DIR$/backend/configurations/settings.py" />
+        <option value="$PROJECT_DIR$/backend/events/models.py" />
+        <option value="$PROJECT_DIR$/README.md" />
       </list>
     </option>
   </component>
@@ -309,10 +297,10 @@
     </packageJsonPaths>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="67" />
-    <option name="y" value="25" />
-    <option name="width" value="1853" />
-    <option name="height" value="1055" />
+    <option name="x" value="1874" />
+    <option name="y" value="184" />
+    <option name="width" value="1843" />
+    <option name="height" value="789" />
   </component>
   <component name="ProjectView">
     <navigator proportions="" version="1">
@@ -335,19 +323,7 @@
               <item name="social-event" type="b2602c69:ProjectViewProjectNode" />
               <item name="social-event" type="462c0819:PsiDirectoryNode" />
               <item name="backend" type="462c0819:PsiDirectoryNode" />
-              <item name="configurations" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="social-event" type="b2602c69:ProjectViewProjectNode" />
-              <item name="social-event" type="462c0819:PsiDirectoryNode" />
-              <item name="backend" type="462c0819:PsiDirectoryNode" />
               <item name="events" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="social-event" type="b2602c69:ProjectViewProjectNode" />
-              <item name="social-event" type="462c0819:PsiDirectoryNode" />
-              <item name="backend" type="462c0819:PsiDirectoryNode" />
-              <item name="users" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -394,10 +370,10 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="67" y="25" width="1853" height="1055" extended-state="6" />
+    <frame x="1920" y="-2" width="1920" height="1082" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.21970116" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.2145144" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -485,16 +461,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/README.md">
-      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
-        <state split_layout="SPLIT">
-          <first_editor relative-caret-position="1455">
-            <caret line="97" column="31" selection-start-line="97" selection-start-column="31" selection-end-line="97" selection-end-column="31" />
-          </first_editor>
-          <second_editor />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/backend/events/migrations/0002_auto_20181112_0302.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="210">
@@ -506,13 +472,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="288">
           <caret line="33" column="25" selection-start-line="33" selection-start-column="18" selection-end-line="33" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/backend/configurations/wsgi.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="16" selection-start-line="16" selection-end-line="16" />
         </state>
       </provider>
     </entry>
@@ -532,13 +491,6 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/backend/users/__init__.py">
       <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/backend/requirements.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="6" lean-forward="true" selection-start-line="6" selection-end-line="6" />
-        </state>
-      </provider>
     </entry>
     <entry file="file://$APPLICATION_HOME_DIR$/helpers/typeshed/stdlib/2/__builtin__.pyi">
       <provider selected="true" editor-type-id="text-editor">
@@ -632,9 +584,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="135">
           <caret line="9" column="55" lean-forward="true" selection-start-line="9" selection-start-column="55" selection-end-line="9" selection-end-column="55" />
-          <folding>
-            <element signature="e#627#676#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -656,24 +605,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/backend/events/models.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="585">
-          <caret line="44" column="65" selection-start-line="44" selection-start-column="59" selection-end-line="44" selection-end-column="65" />
-          <folding>
-            <element signature="e#24#80#0" expanded="true" />
-            <marker date="1542193953050" expanded="true" signature="2386:2387" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/backend/events/participant_api.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="540">
           <caret line="36" selection-start-line="36" selection-end-line="36" />
-          <folding>
-            <element signature="e#0#53#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -681,9 +616,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="240">
           <caret line="16" column="72" selection-start-line="16" selection-start-column="72" selection-end-line="16" selection-end-column="72" />
-          <folding>
-            <element signature="e#0#32#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -691,16 +623,12 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="150">
           <caret line="10" column="50" selection-start-line="10" selection-start-column="50" selection-end-line="10" selection-end-column="50" />
-          <folding>
-            <element signature="e#0#15#0" expanded="true" />
-            <marker date="1542249207422" expanded="true" signature="434:435" ph="..." />
-          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/backend/users/models.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="360">
+        <state relative-caret-position="285">
           <caret line="24" selection-start-line="24" selection-end-line="24" />
           <folding>
             <element signature="e#24#63#0" expanded="true" />
@@ -709,22 +637,45 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/backend/events/comment_api.py">
+    <entry file="file://$PROJECT_DIR$/backend/users/urls.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1065">
-          <caret line="71" column="28" selection-start-line="71" selection-start-column="28" selection-end-line="71" selection-end-column="28" />
+        <state relative-caret-position="135">
+          <caret line="11" selection-start-line="11" selection-end-line="11" />
           <folding>
-            <element signature="e#0#53#0" expanded="true" />
+            <element signature="e#0#32#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/backend/events/like_api.py">
+    <entry file="file://$PROJECT_DIR$/backend/users/api.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="465">
-          <caret line="31" column="19" selection-start-line="31" selection-start-column="19" selection-end-line="31" selection-end-column="19" />
+          <caret line="38" selection-start-line="38" selection-end-line="38" />
           <folding>
-            <element signature="e#0#53#0" expanded="true" />
+            <element signature="e#0#30#0" expanded="true" />
+            <marker date="1542274936524" expanded="true" signature="1062:1064" ph="..." />
+            <marker date="1542274936524" expanded="true" signature="1909:2094" ph="..." />
+            <marker date="1542274936524" expanded="true" signature="2771:2773" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/backend/users/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="105">
+          <caret line="9" selection-start-line="9" selection-end-line="9" />
+          <folding>
+            <element signature="e#24#63#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/backend/core.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1500">
+          <caret line="111" column="20" selection-start-line="111" selection-start-column="20" selection-end-line="111" selection-end-column="20" />
+          <folding>
+            <element signature="e#0#11#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -740,63 +691,75 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/backend/users/views.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="135">
-          <caret line="9" selection-start-line="9" selection-end-line="9" />
-          <folding>
-            <element signature="e#24#63#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/backend/users/urls.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="165">
-          <caret line="11" selection-start-line="11" selection-end-line="11" />
-          <folding>
-            <element signature="e#0#32#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/backend/configurations/settings.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="453">
-          <caret line="104" column="1" selection-start-line="104" selection-start-column="1" selection-end-line="104" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/backend/core.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1665">
-          <caret line="111" column="20" selection-start-line="111" selection-start-column="20" selection-end-line="111" selection-end-column="20" />
-          <folding>
-            <element signature="e#0#11#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/backend/users/api.py">
+    <entry file="file://$PROJECT_DIR$/backend/events/like_api.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="390">
-          <caret line="38" selection-start-line="38" selection-end-line="38" />
+          <caret line="31" column="19" selection-start-line="31" selection-start-column="19" selection-end-line="31" selection-end-column="19" />
           <folding>
-            <element signature="e#0#30#0" expanded="true" />
-            <marker date="1542274936524" expanded="true" signature="1062:1064" ph="..." />
-            <marker date="1542274936524" expanded="true" signature="1909:2094" ph="..." />
-            <marker date="1542274936524" expanded="true" signature="2771:2773" ph="..." />
+            <element signature="e#0#53#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/backend/events/comment_api.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="975">
+          <caret line="71" column="28" selection-start-line="71" selection-start-column="28" selection-end-line="71" selection-end-column="28" />
+          <folding>
+            <element signature="e#0#53#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/backend/events/event_api.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="221">
-          <caret line="191" lean-forward="true" selection-start-line="191" selection-end-line="191" />
+        <state relative-caret-position="671">
+          <caret line="221" column="17" lean-forward="true" selection-start-line="221" selection-start-column="17" selection-end-line="221" selection-end-column="17" />
           <folding>
             <element signature="e#0#67#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/backend/configurations/wsgi.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="210">
+          <caret line="16" lean-forward="true" selection-start-line="16" selection-end-line="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/backend/configurations/settings.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="12" column="9" lean-forward="true" selection-start-line="12" selection-start-column="9" selection-end-line="12" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/backend/events/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="45">
+          <caret line="21" column="10" selection-start-line="21" selection-start-column="10" selection-end-line="21" selection-end-column="10" />
+          <folding>
+            <element signature="e#24#80#0" expanded="true" />
+            <marker date="1542193953050" expanded="true" signature="2386:2387" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/backend/requirements.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="6" lean-forward="true" selection-start-line="6" selection-end-line="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor relative-caret-position="315">
+            <caret line="54" column="42" selection-start-line="54" selection-start-column="42" selection-end-line="54" selection-end-column="42" />
+          </first_editor>
+          <second_editor />
         </state>
       </provider>
     </entry>
