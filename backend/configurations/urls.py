@@ -18,9 +18,9 @@ from configurations import settings
 from helper.upload import upload_image
 
 urlpatterns = [
-	url(r'^user/', include('users.urls')),
-	url(r'^upload/image/$', upload_image),
-	url(r'^event/', include('events.urls')),
+	url(r'^api/user/', include('users.urls')),
+	url(r'^api/upload/image/$', upload_image),
+	url(r'^api/event/', include('events.urls')),
 ]
 
 urlpatterns += static.static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
