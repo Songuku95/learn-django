@@ -131,5 +131,5 @@ def get_list(request, user, args):
 	ids = args.get('ids')
 	users = UserTab.objects.filter(id__in=ids).values('id', 'username', 'fullname', 'avatar_path')
 	return SuccessResponse({
-		'events': list(users)
+		'users': list(users)
 	})
