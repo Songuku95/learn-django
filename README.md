@@ -46,6 +46,13 @@ mkvirtualenv social_event
 workon social_event
 ```
 
+### Install redis
+```commandline
+sudo yum install redis
+sudo systemctl start redis
+sudo systemctl enable redis
+```
+
 ### Clone project
 ```commandline
 # Install some necessary packages
