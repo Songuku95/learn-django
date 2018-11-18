@@ -97,7 +97,6 @@ def update_profile(request, user, args):
 		setattr(user_object, key, value)
 	user_object.save()
 	update_user_by_id(user['id'])
-	print get_user_by_id(user['id'])
 	return SuccessResponse({})
 
 

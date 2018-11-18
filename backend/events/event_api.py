@@ -236,8 +236,6 @@ def search_event(request, user, args):
 	end_date = args.get('end_date')
 	tag = args.get('tag')
 
-	print end_date
-
 	date_filter_events = EventTab.objects
 	if start_date:
 		date_filter_events = date_filter_events.filter(start_date=start_date)
@@ -252,9 +250,6 @@ def search_event(request, user, args):
 		tag_filter_event_ids = list(tag_filter_event_ids.values_list('event_id', flat=True).distinct())
 	else:
 		tag_filter_event_ids = list(EventTab.objects.values_list('id', flat=True))
-
-	print date_filter_event_ids
-	print tag_filter_event_ids
 
 	event_ids = list(set(date_filter_event_ids).intersection(tag_filter_event_ids))
 	return SuccessResponse({'ids': event_ids})
