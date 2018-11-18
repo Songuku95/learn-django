@@ -80,9 +80,9 @@ CREATE TABLE user_tab (
    id INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
    created_at INT UNSIGNED NOT NULL,
    updated_at INT UNSIGNED NOT NULL,
-   email VARCHAR(100) NOT NULL,
    fullname VARCHAR(20),
    sex TINYINT,
+   email VARCHAR(50) NOT NULL,
    username VARCHAR(20) NOT NULL UNIQUE,
    avatar_path VARCHAR(100),
    password_hash VARCHAR(100) NOT NULL,
@@ -97,14 +97,15 @@ CREATE TABLE event_tab (
    created_at INT UNSIGNED NOT NULL,
    updated_at INT UNSIGNED NOT NULL,   
    user_id INT UNSIGNED NOT NULL,
-   title VARCHAR(20) NOT NULL,
+   title VARCHAR(100) NOT NULL,
    description VARCHAR(10000) NOT NULL,
    start_date INT UNSIGNED NOT NULL,
    end_date INT UNSIGNED NOT NULL,
-   address VARCHAR(100),
+   address VARCHAR(200),
    latitude DECIMAL,
    longitude DECIMAL,
-   status TINYINT
+   status TINYINT,
+   INDEX idx_start_date_end_date (start_date, end_date)
 )
 ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -113,9 +114,9 @@ CREATE TABLE image_tab (
    id INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
    created_at INT UNSIGNED NOT NULL,
    updated_at INT UNSIGNED NOT NULL,
-   path VARCHAR(200),
+   path VARCHAR(200) NOT NULL,
    event_id INT UNSIGNED NOT NULL,
-   status TINYINT,
+   status TINYINT NOT NULL,
    INDEX idx_event_id (event_id)
 )
 ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -128,7 +129,7 @@ CREATE TABLE comment_tab (
  content VARCHAR(10000),
  event_id INT UNSIGNED NOT NULL,
  user_id INT UNSIGNED NOT NULL,
- status TINYINT,
+ status TINYINT NOT NULL,
  INDEX idx_event_id (event_id)
 )
 ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -140,7 +141,7 @@ CREATE TABLE event_liker_tab (
  updated_at INT UNSIGNED NOT NULL,
  event_id INT UNSIGNED NOT NULL,
  user_id INT UNSIGNED NOT NULL,
- status INT,
+ status INT NOT NULL,
  INDEX idx_event_id (event_id)
 )
 ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -152,7 +153,7 @@ CREATE TABLE event_participant_tab (
  updated_at INT UNSIGNED NOT NULL,
  event_id INT UNSIGNED NOT NULL,
  user_id INT UNSIGNED NOT NULL,
- status TINYINT,
+ status TINYINT NOT NULL,
  INDEX idx_event_id (event_id)
 )
 ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -160,17 +161,21 @@ ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 CREATE TABLE tag_tab (
  id INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
- name VARCHAR(20),
- INDEX idx_name_id (name)
+ created_at INT UNSIGNED NOT NULL,
+ updated_at INT UNSIGNED NOT NULL,
+ name VARCHAR(20) NOT NULL,
+ INDEX idx_name (name)
 )
 ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 
-CREATE TABLE event_category_tab (
+CREATE TABLE event_tag_tab (
  id INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
+ created_at INT UNSIGNED NOT NULL,
+ updated_at INT UNSIGNED NOT NULL,
  tag_id INT UNSIGNED NOT NULL,
  event_id INT UNSIGNED NOT NULL,
- INDEX idx_event_id (event_id)
+ INDEX idx_event_id_tag_id (event_id, tag_id)
 )
 ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 ```

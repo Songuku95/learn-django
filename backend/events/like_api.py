@@ -23,7 +23,7 @@ def update_like(request, user, args):
 	status = args.get('status')
 	if not EventTab.objects.filter(id=event_id).exists():
 		raise InvalidRequestParams('Invalid id')
-	EventLikerTab.objects.get_or_create(user_id=user.id, event_id=event_id, status=status)
+	EventLikerTab.objects.get_or_create(user_id=user['id'], event_id=event_id, status=status)
 	return SuccessResponse({})
 
 

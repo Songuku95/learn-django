@@ -7,8 +7,9 @@ from django.http import JsonResponse
 from django.utils.deprecation import MiddlewareMixin
 from jsonschema import validate, ValidationError
 
-from enums import ErrorCode, UserRole, UserRoleName
-from errors import ErrorSchema, ServerError, InvalidRequestParams, Unauthorized, PermissionDenied
+import caches
+from enums import UserRoleName
+from errors import ErrorSchema, InvalidRequestParams, Unauthorized
 from users.auth import decode_token
 
 
@@ -51,21 +52,11 @@ class ErrorResponse(JsonResponse):
 		super(ErrorResponse, self).__init__(response)
 
 
-class RequestParamsError(ErrorResponse):
-	error_code = ErrorCode.INVALID_REQUEST_PARAMETERS
-
-	def __init__(self, message):
-		self.error_message = message
-		super(RequestParamsError, self).__init__()
-
-
 class ExceptionMiddleware(MiddlewareMixin):
 	def process_exception(self, request, exception):
 		if isinstance(exception, ErrorSchema):
-			# print exception
-			# TODO: log to file
-			# return ErrorResponse(ServerError())
 			return ErrorResponse(exception)
+	# return ErrorResponse(ServerError())
 
 
 def require_auth(role):
@@ -82,15 +73,13 @@ def require_auth(role):
 			elif role == UserRoleName.MEMBER:
 				payload = decode_token(token, UserRoleName.ADMIN) or decode_token(token, UserRoleName.MEMBER)
 			else:
-				raise PermissionDenied()
+				raise Unauthorized()
 
 			if not payload:
-				raise PermissionDenied()
+				raise Unauthorized()
 
-			from users.models import UserTab
-			try:
-				user = UserTab.objects.get(id=payload.get('sub'))
-			except UserTab.DoesNotExist:
+			user = caches.get_user_by_id(payload['sub'])
+			if not user:
 				raise Unauthorized()
 
 			kwargs['user'] = user

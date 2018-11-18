@@ -1,11 +1,13 @@
 from django.db.models import Q
-from django.views.decorators.http import require_POST, require_safe, require_http_methods
+from django.views.decorators.http import require_POST, require_safe
 
 from core import validate_schema, SuccessResponse, require_auth
 from enums import Sex
 from errors import UserExist, WrongUsernameOrPassword
 from users.auth import generate_password_salt, generate_password_hash, get_token, check_password
 from users.models import UserTab
+
+from caches import update_user_by_id, get_user_by_id
 
 EMAIL_REGEX = '^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$'
 
@@ -23,9 +25,9 @@ signup_schema = {
 @require_POST
 @validate_schema(signup_schema)
 def signup(request, args):
-	email = args.get('email')
-	username = args.get('username')
-	password = args.get('password')
+	email = args['email']
+	username = args['username']
+	password = args['password']
 
 	# Check whether email and username already exists or not
 	if UserTab.objects.filter(Q(username__exact=username) | Q(email__exact=email)).exists():
@@ -56,8 +58,8 @@ login_schema = {
 @require_POST
 @validate_schema(login_schema)
 def login(request, args):
-	username = args.get('username')
-	password = args.get('password')
+	username = args['username']
+	password = args['password']
 	try:
 		user = UserTab.objects.get(username=username)
 	except UserTab.DoesNotExist:
@@ -90,9 +92,12 @@ update_profile_schema = {
 @require_auth('member')
 @validate_schema(update_profile_schema)
 def update_profile(request, user, args):
+	user_object = UserTab.objects.get(id=user['id'])
 	for key, value in args.iteritems():
-		setattr(user, key, value)
-	user.save()
+		setattr(user_object, key, value)
+	user_object.save()
+	update_user_by_id(user['id'])
+	print get_user_by_id(user['id'])
 	return SuccessResponse({})
 
 
@@ -100,13 +105,13 @@ def update_profile(request, user, args):
 @require_auth('member')
 def get_profile(request, user):
 	return SuccessResponse({
-		'id': user.id,
-		'email': user.email,
-		'username': user.username,
-		'avatar_path': user.avatar_path,
-		'fullname': user.fullname,
-		'role': user.role,
-		'sex': user.sex
+		'id': user['id'],
+		'email': user['email'],
+		'username': user['username'],
+		'avatar_path': user['avatar_path'],
+		'fullname': user['fullname'],
+		'role': user['role'],
+		'sex': user['sex']
 	})
 
 
@@ -128,8 +133,8 @@ get_user_list_schema = {
 @require_auth('member')
 @validate_schema(get_user_list_schema)
 def get_list(request, user, args):
-	ids = args.get('ids')
-	users = UserTab.objects.filter(id__in=ids).values('id', 'username', 'fullname', 'avatar_path')
+	ids = args['ids']
+	users = [get_user_by_id(id) for id in ids if get_user_by_id(id)]
 	return SuccessResponse({
-		'users': list(users)
+		'users': users
 	})

@@ -25,7 +25,7 @@ def create(request, user, args):
 	if not EventTab.objects.filter(id=event_id).exists():
 		raise InvalidRequestParams('Invalid id')
 
-	comment = CommentTab.objects.create(event_id=event_id, user_id=user.id, content=content)
+	comment = CommentTab.objects.create(event_id=event_id, user_id=user['id'], content=content)
 	return SuccessResponse({'id': comment.id})
 
 
@@ -71,9 +71,9 @@ def get_comment_details(request, user, args):
 	response = list(CommentTab.objects.filter(id__in=args.get('ids')).values('id', 'content', 'user_id'))
 	for comment in response:
 		user = UserTab.objects.get(id=comment['user_id'])
-		comment['username'] = user.username
-		comment['fullname'] = user.fullname
-		comment['avatar_path'] = user.avatar_path
+		comment['username'] = user['username']
+		comment['fullname'] = user['fullname']
+		comment['avatar_path'] = user['avatar_path']
 	return SuccessResponse({'comments': response})
 
 

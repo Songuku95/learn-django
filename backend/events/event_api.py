@@ -29,8 +29,7 @@ create_event_schema = {
 			'maxItems': 10
 		}
 	},
-	'required': ['title', 'description', 'start_date', 'end_date', 'address', 'latitude', 'longitude', 'image_paths',
-	             'tags']
+	'required': ['title', 'description', 'start_date', 'end_date', 'address', 'latitude', 'longitude']
 }
 
 
@@ -40,8 +39,8 @@ create_event_schema = {
 def create_event(request, user, args):
 	start_date = args.get('start_date')
 	end_date = args.get('end_date')
-	image_paths = args.get('image_paths')
-	tags = args.get('tags')
+	image_paths = args.get('image_paths', [])
+	tags = args.get('tags', [])
 
 	if start_date > end_date:
 		raise InvalidRequestParams('Start date is greater than end date')
@@ -54,13 +53,13 @@ def create_event(request, user, args):
 		address=args.get('address'),
 		latitude=args.get('latitude'),
 		longitude=args.get('longitude'),
-		user_id=user.id,
+		user_id=user['id'],
 	)
 
 	for image_path in image_paths:
 		create_image_with_event_id(image_path, event.id)
-	tag_ids = [create_or_get_tag_id(tag) for tag in tags]
 
+	tag_ids = [create_or_get_tag_id(tag) for tag in tags]
 	for tag_id in tag_ids:
 		EventTagTab.objects.create(tag_id=tag_id, event_id=event.id)
 
@@ -130,7 +129,7 @@ def update_event(request, user, args):
 	try:
 		event = EventTab.objects.get(id=args.get('id'))
 	except EventTab.DoesNotExist:
-		raise InvalidRequestParams('Invalid image id')
+		raise InvalidRequestParams('Invalid event id')
 
 	event_tags = EventTagTab.objects.filter(event_id=event.id)
 	current_tag_ids = [event_tag.id for event_tag in event_tags]
