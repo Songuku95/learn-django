@@ -4,6 +4,7 @@ cffi==1.11.5
 cryptography==2.4.1
 Django==1.11.16
 django-cors-headers==2.4.0
+django-extensions==2.1.3
 enum==0.4.7
 enum34==1.1.6
 functools32==3.2.3.post2
