@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import DatePicker from 'react-datepicker';
 import moment from 'moment';
+import { Link } from 'react-router-dom';
 
 import { searchEvent, getEventList } from 'actions/event';
 
@@ -104,8 +105,8 @@ export class Home extends React.Component {
             this.props.list.map(e => (
               <tbody key={e.id}>
                 <tr onClick={() => this.gotoPageDetail(e.id)} style={{ cursor: 'pointer' }}>
-                  <td><a href={`/detail/${e.id}`}>{e.id}</a></td>
-                  <td><a href={`/detail/${e.id}`}>{e.title}</a></td>
+                  <td><Link to={`/detail/${e.id}`}>{e.id}</Link></td>
+                  <td><Link to={`/detail/${e.id}`}>{e.title}</Link></td>
                   <td>{e.address}</td>
                   <td>{moment.unix(e.startDate).format('MMM DD YYYY')}</td>
                   <td>{moment.unix(e.endDate).format('MMM DD YYYY')}</td>

@@ -22,6 +22,12 @@ export default ({ dispatch, getState }) => next => (action) => {
   return p.then((response) => {
     if (response.result === 'error') {
       alert(response.errorCode);
+      next({
+        type: failureAction,
+        payload: response,
+        options: CaseConverter.snakeCaseToCamelCase(rest.payload),
+      });
+      return response;
     }
 
     // Dispatch async request success action
