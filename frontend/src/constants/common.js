@@ -8,4 +8,4 @@ export const ResponseResult = {
   ERROR: 'error',
 };
 
-export const API_ENDPOINT = 'http://localhost:8000';
+export const API_ENDPOINT = 'http://10.6.19.34';

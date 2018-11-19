@@ -1,6 +1,7 @@
-from django.core.cache import cache
 from functools import wraps
-from django.forms.models import model_to_dict
+
+from django.core.cache import cache
+
 from enums import CommonStatus
 
 
@@ -131,7 +132,7 @@ def get_all_active_event_ids():
 	return list(ids)
 
 
-@get_cache('event_active_ids')
+@update_cache('event_active_ids')
 def update_all_active_event_ids():
 	from events.models import EventTab
 	ids = EventTab.objects.filter(status=CommonStatus.ACTIVE).values_list('id', flat=True)

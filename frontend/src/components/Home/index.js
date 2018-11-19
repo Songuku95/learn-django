@@ -27,8 +27,8 @@ export class Home extends React.Component {
   search = () => {
     const { startDate, endDate, tag } = this.state;
     const request = {};
-    if (startDate) request.startDate = formatDate(startDate.unix());
-    if (endDate) request.endDate = formatDate(endDate.unix());
+    if (startDate) request.startDate = formatDate(startDate.unix() + 86400);
+    if (endDate) request.endDate = formatDate(endDate.unix() + 86400);
     if (tag) request.tag = tag;
 
     this.props.searchEvent(request).then((response) => {

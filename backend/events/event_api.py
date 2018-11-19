@@ -1,11 +1,10 @@
 from django.views.decorators.http import require_POST
 
+import caches
 from core import validate_schema, SuccessResponse, require_auth
 from enums import CommonStatus
 from errors import InvalidRequestParams
 from events.models import EventTab, ImageTab, TagTab, EventTagTab
-
-import caches
 
 create_event_schema = {
 	'type': 'object',
@@ -63,6 +62,8 @@ def create_event(request, user, args):
 	tag_ids = [create_or_get_tag_id(tag) for tag in tags]
 	for tag_id in tag_ids:
 		EventTagTab.objects.create(tag_id=tag_id, event_id=event.id)
+
+	caches.update_all_active_event_ids()
 
 	return SuccessResponse({
 		'id': event.id
