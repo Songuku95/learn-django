@@ -13,7 +13,6 @@ def get_cache(prefix):
 			else:
 				cache_key = prefix
 
-			cache.delete(cache_key)
 			data = cache.get(cache_key)
 			if data:
 				return data
@@ -129,7 +128,6 @@ def update_event_by_id(id):
 def get_all_active_event_ids():
 	from events.models import EventTab
 	ids = EventTab.objects.filter(status=CommonStatus.ACTIVE).values_list('id', flat=True)
-	print ids
 	return list(ids)
 
 
