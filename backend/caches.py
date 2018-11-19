@@ -128,12 +128,12 @@ def update_event_by_id(id):
 @get_cache('event_active_ids')
 def get_all_active_event_ids():
 	from events.models import EventTab
-	ids = EventTab.objects.filter(status=CommonStatus.ACTIVE).values_list('id', flat=True)
+	ids = EventTab.objects.filter(status=CommonStatus.ACTIVE).order_by('-id')[:10000].values_list('id', flat=True)
 	return list(ids)
 
 
 @update_cache('event_active_ids')
 def update_all_active_event_ids():
 	from events.models import EventTab
-	ids = EventTab.objects.filter(status=CommonStatus.ACTIVE).values_list('id', flat=True)
+	ids = EventTab.objects.filter(status=CommonStatus.ACTIVE).order_by('-id')[:10000].values_list('id', flat=True)
 	return list(ids)
