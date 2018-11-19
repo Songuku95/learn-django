@@ -10,7 +10,7 @@ import { formatDate } from 'utils/time';
 import Header from '../Header';
 import Pagination from './Pagination';
 
-const ITEM_PER_PAGE = 2;
+const ITEM_PER_PAGE = 20;
 
 export class Home extends React.Component {
   state = {

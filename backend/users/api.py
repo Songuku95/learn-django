@@ -94,7 +94,8 @@ update_profile_schema = {
 def update_profile(request, user, args):
 	user_object = UserTab.objects.get(id=user['id'])
 	for key, value in args.iteritems():
-		setattr(user_object, key, value)
+		if key in ['fullname', 'sex', 'avatar_path']:
+			setattr(user_object, key, value)
 	user_object.save()
 	update_user_by_id(user['id'])
 	return SuccessResponse({})

@@ -125,4 +125,4 @@ def run():
 	generate_event_likers()
 	generate_event_participants()
 	generate_tags()
-	generate_tags()
+	generate_event_tags()

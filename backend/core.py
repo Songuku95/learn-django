@@ -9,7 +9,7 @@ from jsonschema import validate, ValidationError
 
 import caches
 from enums import UserRoleName
-from errors import ErrorSchema, InvalidRequestParams, Unauthorized
+from errors import ErrorSchema, InvalidRequestParams, Unauthorized, ServerError
 from users.auth import decode_token
 
 
@@ -48,7 +48,6 @@ class ErrorResponse(JsonResponse):
 			'error_code': data.error_code,
 			'error_message': data.error_message
 		}
-
 		super(ErrorResponse, self).__init__(response)
 
 
@@ -56,7 +55,7 @@ class ExceptionMiddleware(MiddlewareMixin):
 	def process_exception(self, request, exception):
 		if isinstance(exception, ErrorSchema):
 			return ErrorResponse(exception)
-	# return ErrorResponse(ServerError())
+		return ErrorResponse(ServerError())
 
 
 def require_auth(role):

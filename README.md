@@ -185,6 +185,9 @@ CREATE TABLE event_tag_tab (
  INDEX idx_event_id_tag_id (event_id, tag_id)
 )
 ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+CREATE INDEX idx_username ON user_tab (username); 
+CREATE INDEX idx_email ON user_tab (email);
 ```
 
 ### Install frontend

@@ -20,8 +20,8 @@ create_schema = {
 @require_auth('member')
 @validate_schema(create_schema)
 def create(request, user, args):
-	event_id = args.get('event_id')
-	content = args.get('content')
+	event_id = args['event_id']
+	content = args['content']
 	if not EventTab.objects.filter(id=event_id).exists():
 		raise InvalidRequestParams('Invalid id')
 
@@ -42,7 +42,7 @@ get_comment_ids_schema = {
 @require_auth('member')
 @validate_schema(get_comment_ids_schema)
 def get_comment_ids(request, user, args):
-	event_id = args.get('id')
+	event_id = args['id']
 	if not EventTab.objects.filter(id=event_id).exists():
 		raise InvalidRequestParams('Invalid id')
 
@@ -68,7 +68,7 @@ get_comment_details_schema = {
 @require_auth('member')
 @validate_schema(get_comment_details_schema)
 def get_comment_details(request, user, args):
-	response = list(CommentTab.objects.filter(id__in=args.get('ids')).values('id', 'content', 'user_id'))
+	response = list(CommentTab.objects.filter(id__in=args['ids'])).values('id', 'content', 'user_id')
 	for comment in response:
 		user = UserTab.objects.get(id=comment['user_id'])
 		comment['username'] = user['username']
@@ -90,7 +90,7 @@ delete_comment_schema = {
 @require_auth('admin')
 @validate_schema(delete_comment_schema)
 def delete(request, user, args):
-	comment_id = args.get('id')
+	comment_id = args['id']
 	try:
 		comment = CommentTab.objects.get(id=comment_id)
 	except CommentTab.DoesNotExist:

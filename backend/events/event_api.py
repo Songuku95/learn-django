@@ -1,10 +1,11 @@
-from django.views.decorators.http import require_POST, require_safe
+from django.views.decorators.http import require_POST
 
 from core import validate_schema, SuccessResponse, require_auth
+from enums import CommonStatus
 from errors import InvalidRequestParams
 from events.models import EventTab, ImageTab, TagTab, EventTagTab
 
-from enums import CommonStatus
+import caches
 
 create_event_schema = {
 	'type': 'object',
@@ -37,8 +38,8 @@ create_event_schema = {
 @require_auth('admin')
 @validate_schema(create_event_schema)
 def create_event(request, user, args):
-	start_date = args.get('start_date')
-	end_date = args.get('end_date')
+	start_date = args['start_date']
+	end_date = args['end_date']
 	image_paths = args.get('image_paths', [])
 	tags = args.get('tags', [])
 
@@ -46,13 +47,13 @@ def create_event(request, user, args):
 		raise InvalidRequestParams('Start date is greater than end date')
 
 	event = EventTab.objects.create(
-		title=args.get('title'),
-		description=args.get('description'),
+		title=args['title'],
+		description=args['description'],
 		start_date=start_date,
 		end_date=end_date,
-		address=args.get('address'),
-		latitude=args.get('latitude'),
-		longitude=args.get('longitude'),
+		address=args['address'],
+		latitude=args['latitude'],
+		longitude=args['longitude'],
 		user_id=user['id'],
 	)
 
@@ -83,11 +84,13 @@ update_event_image_schema = {
 @validate_schema(update_event_image_schema)
 def update_image_status(request, user, args):
 	try:
-		image = ImageTab.objects.get(id=args.get('image_id'))
+		image = ImageTab.objects.get(id=args['image_id'])
 	except ImageTab.DoesNotExist:
 		raise InvalidRequestParams('Invalid image id')
-	image.status = args.get('status')
+	image.status = args['status']
 	image.save()
+
+	caches.update_event_by_id(image.event_id)
 	return SuccessResponse({})
 
 
@@ -119,15 +122,15 @@ edit_event_schema = {
 @require_auth('admin')
 @validate_schema(edit_event_schema)
 def update_event(request, user, args):
-	start_date = args.get('start_date')
-	end_date = args.get('end_date')
-	tags = args.get('tags')
+	start_date = args['start_date']
+	end_date = args['end_date']
+	tags = args['tags']
 
 	if start_date > end_date:
 		raise InvalidRequestParams('Start date is greater than end date')
 
 	try:
-		event = EventTab.objects.get(id=args.get('id'))
+		event = EventTab.objects.get(id=args['id'])
 	except EventTab.DoesNotExist:
 		raise InvalidRequestParams('Invalid event id')
 
@@ -143,41 +146,54 @@ def update_event(request, user, args):
 	for tag_id in add_tag_ids:
 		EventTagTab.objects.create(tag_id=tag_id, event_id=event.id)
 
-	event.title = args.get('title')
-	event.description = args.get('description')
+	old_status = event.status
+
+	event.title = args['title']
+	event.description = args['description']
 	event.start_date = start_date
 	event.end_date = end_date
-	event.address = args.get('address')
-	event.latitude = args.get('latitude')
-	event.longitude = args.get('longitude')
-	event.status = args.get('status')
+	event.address = args['address']
+	event.latitude = args['latitude']
+	event.longitude = args['longitude']
+	event.status = args['status']
 	event.save()
+
+	caches.update_event_by_id(event.id)
+	if old_status != event.status:
+		caches.update_all_active_event_ids()
 
 	return SuccessResponse({})
 
 
-add_image_schema = {
+add_images_schema = {
 	'type': 'object',
 	'properties': {
 		'event_id': {'type': 'integer', 'minimum': 1},
-		'path': {'type': 'string', 'maxLength': 100},
+		'paths': {
+			'type': 'array',
+			'items': {'type': 'string', 'maxLength': 100},
+			'uniqueItems': True,
+			'maxItems': 100
+		},
 	},
-	'required': ['path', 'event_id']
+	'required': ['paths', 'event_id']
 }
 
 
 @require_POST
 @require_auth('admin')
-@validate_schema(add_image_schema)
-def add_image_to_event(request, user, args):
-	path = args.get('path')
-	event_id = args.get('event_id')
+@validate_schema(add_images_schema)
+def add_images_to_event(request, user, args):
+	paths = args['paths']
+	event_id = args['event_id']
 
 	if not EventTab.objects.filter(id=event_id).exists():
 		raise InvalidRequestParams('Invalid event id')
 
-	image_id = create_image_with_event_id(path, event_id)
-	return SuccessResponse({'image_id': image_id})
+	caches.update_event_by_id(event_id)
+
+	image_ids = [create_image_with_event_id(path, event_id) for path in paths]
+	return SuccessResponse({'image_ids': image_ids})
 
 
 get_event_detail_schema = {
@@ -192,30 +208,12 @@ get_event_detail_schema = {
 @require_POST
 @require_auth('member')
 @validate_schema(get_event_detail_schema)
-def get_event_detail(request, args, user):
-	try:
-		event = EventTab.objects.get(id=args.get('id'))
-	except EventTab.DoesNotExist:
+def get_event_detail(request, user, args):
+	event = caches.get_event_by_id(args['id'])
+	if not event:
 		raise InvalidRequestParams('Invalid event id')
 
-	event_tags = EventTagTab.objects.filter(event_id=event.id)
-	tag_ids = [event_tag.tag_id for event_tag in event_tags]
-	tag_names = [TagTab.objects.get(id=tag_id).name for tag_id in tag_ids]
-
-	images = ImageTab.objects.filter(event_id=event.id)
-
-	return SuccessResponse({
-		'id': event.id,
-		'title': event.title,
-		'description': event.description,
-		'start_date': event.start_date,
-		'end_date': event.end_date,
-		'address': event.address,
-		'latitude': event.latitude,
-		'longitude': event.longitude,
-		'tags': tag_names,
-		'images': list(images.values('id', 'path', 'status'))
-	})
+	return SuccessResponse(event)
 
 
 search_schema = {
@@ -234,24 +232,26 @@ search_schema = {
 def search_event(request, user, args):
 	start_date = args.get('start_date')
 	end_date = args.get('end_date')
-	tag = args.get('tag')
+	tag = args.get('tag', '')
 
-	date_filter_events = EventTab.objects
-	if start_date:
-		date_filter_events = date_filter_events.filter(start_date=start_date)
-	if end_date:
-		date_filter_events = date_filter_events.filter(end_date=end_date)
+	if not start_date and not end_date:
+		date_filter_event_ids = caches.get_all_active_event_ids()
+	else:
+		date_filter_events = EventTab.objects
+		if start_date:
+			date_filter_events = date_filter_events.filter(start_date=start_date)
+		if end_date:
+			date_filter_events = date_filter_events.filter(end_date=end_date)
+		date_filter_event_ids = list(date_filter_events.values_list('id', flat=True))
 
-	date_filter_event_ids = list(date_filter_events.values_list('id', flat=True))
-
-	if tag:
+	if tag != '':
 		tag_ids = list(TagTab.objects.filter(name__contains=tag).values_list('id', flat=True))
 		tag_filter_event_ids = EventTagTab.objects.filter(tag_id__in=tag_ids)
 		tag_filter_event_ids = list(tag_filter_event_ids.values_list('event_id', flat=True).distinct())
+		event_ids = list(set(date_filter_event_ids).intersection(tag_filter_event_ids))
 	else:
-		tag_filter_event_ids = list(EventTab.objects.values_list('id', flat=True))
+		event_ids = date_filter_event_ids
 
-	event_ids = list(set(date_filter_event_ids).intersection(tag_filter_event_ids))
 	return SuccessResponse({'ids': event_ids})
 
 
@@ -273,8 +273,8 @@ get_event_list_schema = {
 @require_auth('member')
 @validate_schema(get_event_list_schema)
 def get_event_list(request, user, args):
-	ids = args.get('ids')
-	events = EventTab.objects.filter(id__in=ids).values('id', 'title', 'start_date', 'end_date', 'address')
+	ids = args['ids']
+	events = [caches.get_event_by_id(id) for id in ids]
 	return SuccessResponse({
 		'events': list(events)
 	})
