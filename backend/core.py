@@ -81,7 +81,7 @@ def require_auth(role):
 			if not user:
 				raise Unauthorized()
 
-			kwargs['user'] = user
+			request.user = user
 			return f(request, *args, **kwargs)
 
 		return wrapper_func

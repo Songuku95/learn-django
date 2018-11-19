@@ -18,7 +18,8 @@ update_schema = {
 @require_POST
 @require_auth('member')
 @validate_schema(update_schema)
-def update_like(request, user, args):
+def update_like(request, args):
+	user = request.user
 	event_id = args['id']
 	status = args['status']
 	if not EventTab.objects.filter(id=event_id).exists():
@@ -39,7 +40,7 @@ get_event_likers_schema = {
 @require_POST
 @require_auth('member')
 @validate_schema(get_event_likers_schema)
-def get_event_likers(request, user, args):
+def get_event_likers(request, args):
 	event_id = args['id']
 	if not EventTab.objects.filter(id=event_id).exists():
 		raise InvalidRequestParams('Invalid id')

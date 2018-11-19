@@ -36,7 +36,9 @@ create_event_schema = {
 @require_POST
 @require_auth('admin')
 @validate_schema(create_event_schema)
-def create_event(request, user, args):
+def create_event(request, args):
+	user = request.user
+
 	start_date = args['start_date']
 	end_date = args['end_date']
 	image_paths = args.get('image_paths', [])
@@ -83,7 +85,7 @@ update_event_image_schema = {
 @require_POST
 @require_auth('admin')
 @validate_schema(update_event_image_schema)
-def update_image_status(request, user, args):
+def update_image_status(request, args):
 	try:
 		image = ImageTab.objects.get(id=args['image_id'])
 	except ImageTab.DoesNotExist:
@@ -122,7 +124,7 @@ edit_event_schema = {
 @require_POST
 @require_auth('admin')
 @validate_schema(edit_event_schema)
-def update_event(request, user, args):
+def update_event(request, args):
 	start_date = args['start_date']
 	end_date = args['end_date']
 	tags = args['tags']
@@ -184,7 +186,7 @@ add_images_schema = {
 @require_POST
 @require_auth('admin')
 @validate_schema(add_images_schema)
-def add_images_to_event(request, user, args):
+def add_images_to_event(request, args):
 	paths = args['paths']
 	event_id = args['event_id']
 
@@ -209,7 +211,7 @@ get_event_detail_schema = {
 @require_POST
 @require_auth('member')
 @validate_schema(get_event_detail_schema)
-def get_event_detail(request, user, args):
+def get_event_detail(request, args):
 	event = caches.get_event_by_id(args['id'])
 	if not event:
 		raise InvalidRequestParams('Invalid event id')
@@ -230,7 +232,7 @@ search_schema = {
 @require_POST
 @require_auth('member')
 @validate_schema(search_schema)
-def search_event(request, user, args):
+def search_event(request, args):
 	start_date = args.get('start_date')
 	end_date = args.get('end_date')
 	tag = args.get('tag', '')
@@ -274,7 +276,7 @@ get_event_list_schema = {
 @require_POST
 @require_auth('member')
 @validate_schema(get_event_list_schema)
-def get_event_list(request, user, args):
+def get_event_list(request, args):
 	ids = args['ids']
 	events = [caches.get_event_by_id(id) for id in ids]
 	return SuccessResponse({

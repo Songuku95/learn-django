@@ -91,7 +91,8 @@ update_profile_schema = {
 @require_POST
 @require_auth('member')
 @validate_schema(update_profile_schema)
-def update_profile(request, user, args):
+def update_profile(request, args):
+	user = request.user
 	user_object = UserTab.objects.get(id=user['id'])
 	for key, value in args.iteritems():
 		if key in ['fullname', 'sex', 'avatar_path']:
@@ -103,7 +104,8 @@ def update_profile(request, user, args):
 
 @require_safe
 @require_auth('member')
-def get_profile(request, user):
+def get_profile(request):
+	user = request.user
 	return SuccessResponse({
 		'id': user['id'],
 		'email': user['email'],
@@ -132,7 +134,7 @@ get_user_list_schema = {
 @require_POST
 @require_auth('member')
 @validate_schema(get_user_list_schema)
-def get_list(request, user, args):
+def get_list(request, args):
 	ids = args['ids']
 	users = [get_user_by_id(id) for id in ids if get_user_by_id(id)]
 	return SuccessResponse({

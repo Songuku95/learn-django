@@ -6,6 +6,8 @@ from errors import InvalidRequestParams
 from events.models import EventTab, CommentTab
 from users.models import UserTab
 
+import caches
+
 create_schema = {
 	'type': 'object',
 	'properties': {
@@ -19,7 +21,8 @@ create_schema = {
 @require_POST
 @require_auth('member')
 @validate_schema(create_schema)
-def create(request, user, args):
+def create(request, args):
+	user = request.user
 	event_id = args['event_id']
 	content = args['content']
 	if not EventTab.objects.filter(id=event_id).exists():
@@ -41,7 +44,7 @@ get_comment_ids_schema = {
 @require_POST
 @require_auth('member')
 @validate_schema(get_comment_ids_schema)
-def get_comment_ids(request, user, args):
+def get_comment_ids(request, args):
 	event_id = args['id']
 	if not EventTab.objects.filter(id=event_id).exists():
 		raise InvalidRequestParams('Invalid id')
@@ -67,14 +70,14 @@ get_comment_details_schema = {
 @require_POST
 @require_auth('member')
 @validate_schema(get_comment_details_schema)
-def get_comment_details(request, user, args):
-	response = list(CommentTab.objects.filter(id__in=args['ids'])).values('id', 'content', 'user_id')
-	for comment in response:
-		user = UserTab.objects.get(id=comment['user_id'])
+def get_comment_details(request, args):
+	comments = list(CommentTab.objects.filter(id__in=args['ids']).values('id', 'content', 'user_id'))
+	for comment in comments:
+		user = caches.get_user_by_id(comment['user_id'])
 		comment['username'] = user['username']
 		comment['fullname'] = user['fullname']
 		comment['avatar_path'] = user['avatar_path']
-	return SuccessResponse({'comments': response})
+	return SuccessResponse({'comments': comments})
 
 
 delete_comment_schema = {
@@ -89,7 +92,7 @@ delete_comment_schema = {
 @require_POST
 @require_auth('admin')
 @validate_schema(delete_comment_schema)
-def delete(request, user, args):
+def delete(request, args):
 	comment_id = args['id']
 	try:
 		comment = CommentTab.objects.get(id=comment_id)
