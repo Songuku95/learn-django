@@ -252,6 +252,7 @@ def search_event(request, user, args):
 	else:
 		event_ids = date_filter_event_ids
 
+	list.sort(event_ids)
 	return SuccessResponse({'ids': event_ids})
 
 
