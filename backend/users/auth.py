@@ -2,8 +2,10 @@ import datetime
 import random
 import string
 
-import bcrypt
+# import bcrypt
 import jwt
+import hashlib
+
 
 from enums import UserRoleName
 
@@ -18,12 +20,14 @@ def generate_password_salt():
 
 
 def generate_password_hash(password, password_salt):
-	return bcrypt.hashpw((PASSWORD_PEPPER + password_salt + password).encode('ascii', 'ignore'), bcrypt.gensalt())
+	# return bcrypt.hashpw((PASSWORD_PEPPER + password_salt + password).encode('ascii', 'ignore'), bcrypt.gensalt())
+	return hashlib.sha512(PASSWORD_PEPPER + password_salt + password).hexdigest()
 
 
 def check_password(password, password_salt, password_hash):
-	return bcrypt.checkpw((PASSWORD_PEPPER + password_salt + password).encode('ascii', 'ignore'),
-	                      password_hash.encode('ascii', 'ignore'))
+	# return bcrypt.checkpw((PASSWORD_PEPPER + password_salt + password).encode('ascii', 'ignore'),
+	#                       password_hash.encode('ascii', 'ignore'))
+	return hashlib.sha512(PASSWORD_PEPPER + password_salt + password).hexdigest() == password_hash
 
 
 def get_token(user):
