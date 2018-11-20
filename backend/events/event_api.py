@@ -237,21 +237,22 @@ def search_event(request, args):
 	end_date = args.get('end_date')
 	tag = args.get('tag', '')
 
-	if not start_date and not end_date:
-		date_filter_event_ids = caches.get_all_active_event_ids()
-	else:
-		date_filter_events = EventTab.objects.filter(status=CommonStatus.ACTIVE)
-		if start_date:
-			date_filter_events = date_filter_events.filter(start_date=start_date)
-		if end_date:
-			date_filter_events = date_filter_events.filter(end_date=end_date)
-		date_filter_event_ids = list(date_filter_events.order_by('-id')[:10000].values_list('id', flat=True))
+	# By default: only return 10000 latest active events
+	if start_date is None and end_date is None and tag == '':
+		return SuccessResponse({'ids': caches.get_all_active_event_ids()})
+
+	date_filter_events = EventTab.objects.filter(status=CommonStatus.ACTIVE)
+	if start_date is not None:
+		date_filter_events = date_filter_events.filter(start_date=start_date)
+	if end_date is not None:
+		date_filter_events = date_filter_events.filter(end_date=end_date)
+	date_filter_event_ids = list(date_filter_events.values_list('id', flat=True))
 
 	if tag != '':
-		tag_ids = list(TagTab.objects.filter(name__contains=tag).order_by('-id')[:10000].values_list('id', flat=True))
-		tag_filter_event_ids = EventTagTab.objects.filter(tag_id__in=tag_ids).order_by('-id')[:10000]
-		tag_filter_event_ids = list(tag_filter_event_ids.values_list('event_id', flat=True).distinct())
-		event_ids = list(set(date_filter_event_ids).intersection(tag_filter_event_ids))
+		tag_ids = list(TagTab.objects.filter(name__contains=tag).values_list('id', flat=True))
+		tag_filter_event_ids = EventTagTab.objects.filter(tag_id__in=tag_ids)
+		tag_filter_event_ids = list(tag_filter_event_ids.values_list('event_id', flat=True))
+		event_ids = list(set(date_filter_event_ids).intersection(set(tag_filter_event_ids)))
 	else:
 		event_ids = date_filter_event_ids
 
