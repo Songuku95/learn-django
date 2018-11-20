@@ -92,7 +92,7 @@ CREATE TABLE user_tab (
    email VARCHAR(50) NOT NULL,
    username VARCHAR(20) NOT NULL UNIQUE,
    avatar_path VARCHAR(100),
-   password_hash VARCHAR(100) NOT NULL,
+   password_hash VARCHAR(200) NOT NULL,
    password_salt VARCHAR(100) NOT NULL,
    role TINYINT
 )
@@ -236,3 +236,6 @@ sudo systemcrl restart nginx
 cd backend/
 gunicorn --workers 3 --bind 0.0.0.0:8000 configurations.wsgi
 ```
+
+# API and Performance
+https://docs.google.com/document/d/1j3P-6gAhh_PJnFPoaEaST2mctHyoz8pFvn2etE37ikM/edit?usp=sharing
