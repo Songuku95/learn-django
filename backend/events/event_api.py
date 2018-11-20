@@ -241,20 +241,17 @@ def search_event(request, args):
 	if start_date is None and end_date is None and tag == '':
 		return SuccessResponse({'ids': caches.get_all_active_event_ids()})
 
-	date_filter_events = EventTab.objects.filter(status=CommonStatus.ACTIVE)
-	if start_date is not None:
-		date_filter_events = date_filter_events.filter(start_date=start_date)
-	if end_date is not None:
-		date_filter_events = date_filter_events.filter(end_date=end_date)
-	date_filter_event_ids = list(date_filter_events.values_list('id', flat=True))
-
 	if tag != '':
 		tag_ids = list(TagTab.objects.filter(name__contains=tag).values_list('id', flat=True))
 		tag_filter_event_ids = EventTagTab.objects.filter(tag_id__in=tag_ids)
 		tag_filter_event_ids = list(tag_filter_event_ids.values_list('event_id', flat=True))
-		event_ids = list(set(date_filter_event_ids).intersection(set(tag_filter_event_ids)))
-	else:
-		event_ids = date_filter_event_ids
+		event_ids = list(set(tag_filter_event_ids))
+
+	if start_date is not None:
+		event_ids = [id for id in event_ids if caches.get_event_by_id(id)['start_date'] == start_date]
+	if end_date is not None:
+		event_ids = [id for id in event_ids if caches.get_event_by_id(id)['end_date'] == end_date]
+	event_ids = [id for id in event_ids if caches.get_event_by_id(id)['status'] == CommonStatus.ACTIVE]
 
 	list.sort(event_ids, reverse=True)
 	return SuccessResponse({'ids': event_ids})

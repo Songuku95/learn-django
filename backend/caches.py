@@ -91,7 +91,8 @@ def get_event_by_id(id):
 		'latitude': event.latitude,
 		'longitude': event.longitude,
 		'tags': tag_names,
-		'images': list(images.values('id', 'path', 'status'))
+		'images': list(images.values('id', 'path', 'status')),
+		'status': event.status
 	}
 	return event
 
@@ -137,3 +138,13 @@ def update_all_active_event_ids():
 	from events.models import EventTab
 	ids = EventTab.objects.filter(status=CommonStatus.ACTIVE).order_by('-id')[:10000].values_list('id', flat=True)
 	return list(ids)
+
+
+@get_cache('tag_')
+def get_event_ids_contain_tag(key):
+	from events.models import TagTab, EventTagTab
+	tag_ids = list(TagTab.objects.filter(name__contains=key).values_list('id', flat=True))
+	tag_filter_event_ids = EventTagTab.objects.filter(tag_id__in=tag_ids)
+	tag_filter_event_ids = list(tag_filter_event_ids.values_list('event_id', flat=True))
+	event_ids = list(set(tag_filter_event_ids))
+	return event_ids
