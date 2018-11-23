@@ -111,7 +111,7 @@ CREATE TABLE event_tab (
    address VARCHAR(200),
    latitude DECIMAL,
    longitude DECIMAL,
-   status TINYINT,
+   status TINYINT
    INDEX idx_start_date_end_date (start_date, end_date)
 )
 ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -149,7 +149,7 @@ CREATE TABLE event_liker_tab (
  event_id INT UNSIGNED NOT NULL,
  user_id INT UNSIGNED NOT NULL,
  status INT NOT NULL,
- INDEX idx_event_id (event_id)
+ INDEX idx_event_id_user_id (event_id, user_id)
 )
 ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -161,7 +161,7 @@ CREATE TABLE event_participant_tab (
  event_id INT UNSIGNED NOT NULL,
  user_id INT UNSIGNED NOT NULL,
  status TINYINT NOT NULL,
- INDEX idx_event_id (event_id)
+ INDEX idx_event_id_user_id (event_id, user_id)
 )
 ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -204,136 +204,23 @@ npm install
 ### Install nginx
 ```commandline
 sudo yum install nginx
+sudo systemctl start nginx
+sudo systemctl enable nginx
 
-sudo vi /etc/nginx/nginx.conf
+# Create SSL Certificate
+sudo mkdir /etc/ssl/private
+sudo chmod 700 /etc/ssl/private
+sudo openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/ssl/private/nginx-selfsigned.key -out /etc/ssl/certs/nginx-selfsigned.crt
+sudo openssl dhparam -out /etc/ssl/certs/dhparam.pem 2048
 
-# Add these lines to the file:
-    server {
-        listen 80;
-        server_name {YOUR IP OR DOMAIN};
-    
-        location = /favicon.ico { access_log off; log_not_found off; }
-        
-        location /static/ {
-            autoindex on;
-            root /home/khanh/social-event/frontend/build/static;
-        }
-    
-        location /media/ {
-            autoindex on;
-            alias /var/www/media/;
-        }
-    
-        location /api/ {
-            proxy_set_header Host $http_host;
-            proxy_set_header X-Real-IP $remote_addr;
-            proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-            proxy_set_header X-Forwarded-Proto $scheme;
-            proxy_pass http://127.0.0.1:8000;
-        }
-    
-        location / {
-            proxy_set_header Host $http_host;
-            proxy_set_header X-Real-IP $remote_addr;
-            proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-            proxy_set_header X-Forwarded-Proto $scheme;
-            proxy_pass http://127.0.0.1:5000;
-        }
-    
-    }
-
-    # server {
-    #     listen       80 default_server;
-    #     listen       [::]:80 default_server;
-    #     server_name  _;
-    #     root         /usr/share/nginx/html;
-    #
-    #     # Load configuration files for the default server block.
-    #     include /etc/nginx/default.d/*.conf;
-    #
-    #     location / {
-    #     }
-    #
-    #     error_page 404 /404.html;
-    #         location = /40x.html {
-    #     }
-    #
-    #     error_page 500 502 503 504 /50x.html;
-    #         location = /50x.html {
-    #     }
-    # }
-
-
-server {
-    listen 443 http2 ssl;
-    listen [::]:443 http2 ssl;
-
-    server_name server_IP_address;
-
-    ssl_certificate /etc/ssl/certs/nginx-selfsigned.crt;
-    ssl_certificate_key /etc/ssl/private/nginx-selfsigned.key;
-    ssl_dhparam /etc/ssl/certs/dhparam.pem;
-
-    ########################################################################
-    # from https://cipherli.st/                                            #
-    # and https://raymii.org/s/tutorials/Strong_SSL_Security_On_nginx.html #
-    ########################################################################
-
-    ssl_protocols TLSv1.3;# Requires nginx >= 1.13.0 else use TLSv1.2
-    ssl_prefer_server_ciphers on; 
-    ssl_dhparam /etc/nginx/dhparam.pem; # openssl dhparam -out /etc/nginx/dhparam.pem 4096
-    ssl_ciphers ECDHE-RSA-AES256-GCM-SHA512:DHE-RSA-AES256-GCM-SHA512:ECDHE-RSA-AES256-GCM-SHA384:DHE-RSA-AES256-GCM-SHA384:ECDHE-RSA-AES256-SHA384;
-    ssl_ecdh_curve secp384r1; # Requires nginx >= 1.1.0
-    ssl_session_timeout  10m;
-    ssl_session_cache shared:SSL:10m;
-    ssl_session_tickets off; # Requires nginx >= 1.5.9
-    ssl_stapling on; # Requires nginx >= 1.3.7
-    ssl_stapling_verify on; # Requires nginx => 1.3.7
-    resolver $DNS-IP-1 $DNS-IP-2 valid=300s;
-    resolver_timeout 5s; 
-    add_header Strict-Transport-Security "max-age=63072000; includeSubDomains; preload";
-    add_header X-Frame-Options DENY;
-    add_header X-Content-Type-Options nosniff;
-    add_header X-XSS-Protection "1; mode=block";
-                
-
-
-    ##################################
-    # END https://cipherli.st/ BLOCK #
-    ##################################
-
-    location = /favicon.ico { access_log off; log_not_found off; }
-    
-    location /media/ {
-        autoindex on;
-        alias /var/www/media/;
-    }
-
-    location /api/ {
-        proxy_set_header Host $http_host;
-        proxy_set_header X-Real-IP $remote_addr;
-        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-        proxy_set_header X-Forwarded-Proto $scheme;
-        proxy_pass http://127.0.0.1:8000;
-    }
-
-    location / {
-        proxy_set_header Host $http_host;
-        proxy_set_header X-Real-IP $remote_addr;
-        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-        proxy_set_header X-Forwarded-Proto $scheme;
-        proxy_pass http://127.0.0.1:5000;
-    }
-}
-
-
-sudo systemcrl restart nginx
+https://www.digitalocean.com/community/tutorials/how-to-create-a-self-signed-ssl-certificate-for-nginx-on-centos-7
 ```
 
 ### Use gunicorn to run your server
 ```commandline
-cd backend/
-gunicorn --workers 3 --bind 0.0.0.0:8000 configurations.wsgi
+cd backends/
+gunicorn --workers 4 --bind 0.0.0.0:8000 member.wsgi
+gunicorn --workers 4 --bind 0.0.0.0:9000 admin.wsgi
 ```
 
 # API and Performance
