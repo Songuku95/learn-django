@@ -49,12 +49,16 @@ def add_tags_to_event(tag_ids, event_id):
 	for id in tag_ids:
 		EventTagTab.objects.create(event_id=event_id, tag_id=id)
 	cache_event_tag_ids(event_id)
+	for id in tag_ids:
+		cache_event_ids_have_tag_id(id)
 
 
 def delete_tags_from_event(tag_ids, event_id):
 	for id in tag_ids:
 		EventTagTab.objects.get(event_id=event_id, tag_id=id).delete()
 	cache_event_tag_ids(event_id)
+	for id in tag_ids:
+		cache_event_ids_have_tag_id(id)
 
 
 def update_image_status(id, status):
