@@ -35,10 +35,9 @@ INSTALLED_APPS = [
 	'django.contrib.sessions',
 	'django.contrib.messages',
 	'django.contrib.staticfiles',
-	'users.apps.UsersConfig',
-	'events.apps.EventsConfig',
 	'corsheaders',
-	'django_extensions'
+	'django_extensions',
+	'commonlib',
 ]
 
 MIDDLEWARE = [
@@ -50,10 +49,10 @@ MIDDLEWARE = [
 	'django.contrib.auth.middleware.AuthenticationMiddleware',
 	'django.contrib.messages.middleware.MessageMiddleware',
 	'django.middleware.clickjacking.XFrameOptionsMiddleware',
-	'core.ExceptionMiddleware',
+	'commonlib.core.LogMiddleware',
 ]
 
-ROOT_URLCONF = 'configurations.urls'
+ROOT_URLCONF = 'admin.urls'
 
 TEMPLATES = [
 	{
@@ -71,7 +70,7 @@ TEMPLATES = [
 	},
 ]
 
-WSGI_APPLICATION = 'configurations.wsgi.application'
+WSGI_APPLICATION = 'member.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/1.11/ref/settings/#databases
@@ -110,7 +109,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Ho_Chi_Minh'
 
 USE_I18N = True
 
@@ -144,3 +143,28 @@ CACHES = {
 
 SESSION_ENGINE = "django.contrib.sessions.backends.cache"
 SESSION_CACHE_ALIAS = "default"
+
+LOGGING = {
+	'version': 1,
+	'disable_existing_loggers': False,
+	'formatters': {
+		'verbose': {
+			'format': '%(asctime)s|%(levelname)s|%(request_path)s|elapsed=%(elapsed)s|%(message)s'
+		}
+	},
+	'handlers': {
+		'file': {
+			'level': 'DEBUG',
+			'class': 'logging.FileHandler',
+			'filename': '/var/log/social_event/admin.log',
+			'formatter': 'verbose'
+		},
+	},
+	'loggers': {
+		'social_event': {
+			'handlers': ['file'],
+			'level': 'DEBUG',
+			'propagate': True
+		},
+	},
+}

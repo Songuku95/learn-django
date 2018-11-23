@@ -3,7 +3,7 @@ import uuid
 from django.core.files.storage import FileSystemStorage
 from django.views.decorators.http import require_POST
 
-from core import SuccessResponse, require_auth
+from commonlib.core import SuccessResponse, require_auth
 from errors import InvalidRequestParams, FileTooLarge
 
 MAX_IMAGE_FILE_SIZE = 4 * 1024 * 1024

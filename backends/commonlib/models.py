@@ -1,10 +1,45 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals, absolute_import
 
+import time
+
 from django.db import models
 
-from commonlib.core import Model
-from enums import CommonStatus
+from commonlib.constant import CommonStatus, Sex, UserRole
+
+
+# Reference: https://stackoverflow.com/questions/1737017/django-auto-now-and-auto-now-add
+class Model(models.Model):
+	created_at = models.PositiveIntegerField(editable=False)
+	updated_at = models.PositiveIntegerField()
+
+	def save(self, *args, **kwargs):
+		# On saves, update timestamps
+		now = int(time.time())
+		if not self.id:
+			self.created_at = now
+		self.updated_at = now
+		return super(Model, self).save(*args, **kwargs)
+
+	class Meta:
+		abstract = True
+
+
+class UserTab(Model):
+	username = models.CharField(max_length=20)
+	fullname = models.CharField(max_length=20)
+	sex = models.SmallIntegerField(default=Sex.PENDING)
+	email = models.CharField(max_length=50)
+	avatar_path = models.CharField(max_length=100)
+	role = models.SmallIntegerField(default=UserRole.MEMBER)
+	password_hash = models.CharField(max_length=100)
+	password_salt = models.CharField(max_length=12)
+
+	class Meta:
+		db_table = 'user_tab'
+
+	def __unicode__(self):
+		return self.username
 
 
 class EventTab(Model):

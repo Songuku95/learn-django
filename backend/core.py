@@ -12,6 +12,10 @@ from enums import UserRoleName
 from errors import ErrorSchema, InvalidRequestParams, Unauthorized, ServerError
 from users.auth import decode_token
 
+import logging
+
+request_logger = logging.getLogger('django.request')
+
 
 # Reference: https://stackoverflow.com/questions/1737017/django-auto-now-and-auto-now-add
 class Model(models.Model):
@@ -52,6 +56,9 @@ class ErrorResponse(JsonResponse):
 
 
 class ExceptionMiddleware(MiddlewareMixin):
+	def process_request(self, request):
+		request_logger.error('{0}: {1}'.format(request.method, request.path))
+
 	def process_exception(self, request, exception):
 		if isinstance(exception, ErrorSchema):
 			return ErrorResponse(exception)

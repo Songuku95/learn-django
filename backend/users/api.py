@@ -1,7 +1,7 @@
 from django.db.models import Q
 from django.views.decorators.http import require_POST, require_safe
 
-from core import validate_schema, SuccessResponse, require_auth
+from commonlib.core import validate_schema, SuccessResponse, require_auth
 from enums import Sex
 from errors import UserExist, WrongUsernameOrPassword
 from users.auth import generate_password_salt, generate_password_hash, get_token, check_password

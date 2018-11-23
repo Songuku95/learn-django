@@ -1,9 +1,10 @@
 from django.views.decorators.http import require_POST
 
-from commonlib.core import validate_schema, SuccessResponse, require_auth
-from enums import CommonStatus
-from errors import InvalidRequestParams
-from events.models import EventTab, EventLikerTab
+from commonlib import eventlib, likelib
+from commonlib.auth import require_auth
+from commonlib.constant import CommonStatus
+from commonlib.core import validate_schema, SuccessResponse
+from commonlib.errors import InvalidRequestParams
 
 update_schema = {
 	'type': 'object',
@@ -19,12 +20,15 @@ update_schema = {
 @require_auth('member')
 @validate_schema(update_schema)
 def update_like(request, args):
-	user = request.user
+	user_id = request.user_id
 	event_id = args['id']
 	status = args['status']
-	if not EventTab.objects.filter(id=event_id).exists():
-		raise InvalidRequestParams('Invalid id')
-	EventLikerTab.objects.get_or_create(user_id=user['id'], event_id=event_id, status=status)
+
+	if not eventlib.get_event_by_id(event_id):
+		raise InvalidRequestParams('Event does not exist')
+
+	likelib.get_or_create_like(event_id, user_id, status)
+
 	return SuccessResponse({})
 
 
@@ -42,9 +46,10 @@ get_event_likers_schema = {
 @validate_schema(get_event_likers_schema)
 def get_event_likers(request, args):
 	event_id = args['id']
-	if not EventTab.objects.filter(id=event_id).exists():
-		raise InvalidRequestParams('Invalid id')
 
-	user_ids = EventLikerTab.objects.filter(event_id=event_id, status=CommonStatus.ACTIVE) \
-		.values_list('user_id', flat=True)
-	return SuccessResponse({'user_ids': list(user_ids)})
+	if not eventlib.get_event_by_id(event_id):
+		raise InvalidRequestParams('Event does not exist')
+
+	liker_ids = likelib.get_liker_ids(event_id)
+
+	return SuccessResponse({'user_ids': liker_ids})

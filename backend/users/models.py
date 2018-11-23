@@ -3,7 +3,7 @@ from __future__ import unicode_literals
 
 from django.db import models
 
-from core import Model
+from commonlib.core import Model
 from enums import UserRole, Sex
 
 

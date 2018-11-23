@@ -1,7 +1,7 @@
 from django.views.decorators.http import require_POST
 
 import caches
-from core import validate_schema, SuccessResponse, require_auth
+from commonlib.core import validate_schema, SuccessResponse, require_auth
 from enums import CommonStatus
 from errors import InvalidRequestParams
 from events.models import EventTab, ImageTab, TagTab, EventTagTab
