@@ -44,7 +44,10 @@ class LogMiddleware(MiddlewareMixin):
 			'request_path': request.path,
 			'elapsed': time.time() - request.start_time,
 		}
-		request_logger.info('\n' + request.body, extra=log_data)
+		if request.content_type == 'application/json':
+			request_logger.info('\n' + request.body, extra=log_data)
+		else:
+			request_logger.info('', extra=log_data)
 		return response
 
 	def process_exception(self, request, exception):
