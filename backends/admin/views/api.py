@@ -58,7 +58,6 @@ def create_event(request, args):
 		'user_id': request.user_id
 	})
 
-	print event
 	eventlib.add_images_to_event(image_paths, event['id'])
 	tag_ids = [eventlib.get_or_create_tag(tag)['id'] for tag in tags]
 
@@ -126,7 +125,7 @@ def update_event(request, args):
 	if start_date > end_date:
 		raise InvalidRequestParams('Start date is greater than end date')
 
-	event = eventlib.get_event_by_id(event_id)
+	event = eventlib.get_event(event_id)
 	if not event:
 		raise InvalidRequestParams('Event does not exist')
 
@@ -164,7 +163,7 @@ def add_images_to_event(request, args):
 	paths = args['paths']
 	event_id = args['event_id']
 
-	event = eventlib.get_event_by_id(event_id)
+	event = eventlib.get_event(event_id)
 	if not event:
 		raise InvalidRequestParams('Event does not exist')
 

@@ -24,10 +24,10 @@ def update_like(request, args):
 	event_id = args['id']
 	status = args['status']
 
-	if not eventlib.get_event_by_id(event_id):
+	if not eventlib.get_event(event_id):
 		raise InvalidRequestParams('Event does not exist')
 
-	likelib.get_or_create_like(event_id, user_id, status)
+	likelib.update(event_id, user_id, status)
 
 	return SuccessResponse({})
 
@@ -47,7 +47,7 @@ get_event_likers_schema = {
 def get_event_likers(request, args):
 	event_id = args['id']
 
-	if not eventlib.get_event_by_id(event_id):
+	if not eventlib.get_event(event_id):
 		raise InvalidRequestParams('Event does not exist')
 
 	liker_ids = likelib.get_liker_ids(event_id)

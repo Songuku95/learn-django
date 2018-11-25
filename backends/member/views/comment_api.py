@@ -21,7 +21,7 @@ create_schema = {
 def create(request, args):
 	event_id = args['event_id']
 	content = args['content']
-	if eventlib.get_event_by_id(event_id) is None:
+	if eventlib.get_event(event_id) is None:
 		raise InvalidRequestParams('Event does not exist')
 
 	comment = commentlib.create_comment(request.user_id, event_id, content)
@@ -44,7 +44,7 @@ get_comment_ids_schema = {
 def get_comment_ids(request, args):
 	event_id = args['id']
 
-	if eventlib.get_event_by_id(event_id) is None:
+	if eventlib.get_event(event_id) is None:
 		raise InvalidRequestParams('Event does not exist')
 
 	comment_ids = commentlib.get_comment_ids_of_event(event_id)

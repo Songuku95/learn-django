@@ -111,13 +111,10 @@ def login(request, args):
 	user = userlib.get_user_by_username(username)
 
 	if not user:
-		print 'not user'
 		raise WrongUsernameOrPassword()
 
 	password_hash = auth.get_password_hash(encrypted_password, user['password_salt'], verify_code)
 	if password_hash != user['password_hash']:
-		print password_hash
-		print user['password_hash']
 		raise WrongUsernameOrPassword()
 
 	return SuccessResponse({
@@ -185,8 +182,15 @@ get_user_list_schema = {
 @validate_schema(get_user_list_schema)
 def get_infos(request, args):
 	users = userlib.get_user_list(args['ids'])
+	result = [{
+		'id': user['id'],
+		'user_name': user['username'],
+		'fullname': user['fullname'],
+		'avatar_path': user['avatar_path'],
+		'email': user['email']
+	} for user in users]
 	return SuccessResponse({
-		'users': users
+		'users': result
 	})
 
 

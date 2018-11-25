@@ -1,7 +1,11 @@
-from commonlib.models import EventTab, ImageTab, TagTab, EventTagTab, EventLikerTab, EventParticipantTab
-from django.forms.models import model_to_dict
+import time
 
 from django.core.cache import cache
+from django.forms.models import model_to_dict
+
+from commonlib.cachelib import get_many, get_one
+from commonlib.constant import CachePrefix
+from commonlib.models import EventTab, ImageTab, TagTab, EventTagTab
 
 
 def create_event(data):
@@ -15,7 +19,7 @@ def update_event(event_id, data):
 		if key in ['title', 'description', 'start_date', 'end_date', 'address', 'latitude', 'longitude', 'status']:
 			setattr(event, key, value)
 	event.save()
-	cache_event_by_id(event_id)
+	cache.delete(CachePrefix.EVENT_DETAIL + str(event_id))
 
 
 def add_images_to_event(paths, event_id):
@@ -24,22 +28,16 @@ def add_images_to_event(paths, event_id):
 			path=path,
 			event_id=event_id
 		)
-	cache_images_of_event(event_id)
+	cache.delete(CachePrefix.EVENT_IMAGES + str(event_id))
 
 
-def cache_images_of_event(event_id):
+@get_one(CachePrefix.EVENT_IMAGES)
+def get_images_of_event(event_id):
 	images = list(ImageTab.objects.filter(event_id=event_id).values('id', 'path'))
-	cache.set('event_images_' + str(event_id), images)
 	return images
 
 
-def get_images_of_event(event_id):
-	images = cache.get('event_images' + str(event_id))
-	if images is not None:
-		return images
-	return cache_images_of_event(event_id)
-
-
+@get_one(CachePrefix.TAG_BY_NAME)
 def get_or_create_tag(name):
 	tag = TagTab.objects.get_or_create(name=name)[0]
 	return model_to_dict(tag)
@@ -48,17 +46,13 @@ def get_or_create_tag(name):
 def add_tags_to_event(tag_ids, event_id):
 	for id in tag_ids:
 		EventTagTab.objects.create(event_id=event_id, tag_id=id)
-	cache_event_tag_ids(event_id)
-	for id in tag_ids:
-		cache_event_ids_have_tag_id(id)
+	cache.delete(CachePrefix.EVENT_TAGS + str(event_id))
 
 
 def delete_tags_from_event(tag_ids, event_id):
 	for id in tag_ids:
 		EventTagTab.objects.get(event_id=event_id, tag_id=id).delete()
-	cache_event_tag_ids(event_id)
-	for id in tag_ids:
-		cache_event_ids_have_tag_id(id)
+	cache.delete(CachePrefix.EVENT_TAGS + str(event_id))
 
 
 def update_image_status(id, status):
@@ -71,62 +65,49 @@ def update_image_status(id, status):
 	return model_to_dict(image)
 
 
-def cache_event_by_id(id):
+@get_one(CachePrefix.EVENT_DETAIL)
+def get_event(id):
 	try:
 		event = model_to_dict(EventTab.objects.get(id=id))
 	except EventTab.DoesNotExist:
 		return None
-	cache.set('event_id_' + str(id), event)
 	return event
 
 
-def get_event_by_id(id):
-	event = cache.get('event_id_' + str(id))
-	if event:
-		return event
-	return cache_event_by_id(id)
-
-
-def cache_event_tag_ids(event_id):
+def get_event_tag_ids(event_id):
 	tag_ids = EventTagTab.objects.filter(event_id=event_id).values_list('tag_id', flat=True)
-	cache.set('event_tag_ids_' + str(event_id), tag_ids)
 	return tag_ids
 
 
-def get_event_tag_ids(event_id):
-	tag_ids = cache.get('event_tag_ids_' + str(event_id))
-	if tag_ids is not None:
-		return tag_ids
-	return cache_event_tag_ids(event_id)
+@get_one(CachePrefix.EVENT_TAGS)
+def get_event_tags(event_id):
+	tag_ids = list(EventTagTab.objects.filter(event_id=event_id).values_list('tag_id', flat=True))
+	tag_names = list(TagTab.objects.filter(id__in=tag_ids).values_list('name', flat=True))
+	return tag_names
 
 
-def cache_tag_names(tag_ids):
-	names = list(TagTab.objects.filter(id__in=tag_ids).values_list('name', flat=True))
-	cache.set('tag_names_' + str(tag_ids), names)
-	return names
-
-
-def get_tag_names(tag_ids):
-	names = cache.get('tag_names_' + str(tag_ids))
-	if names is not None:
-		return names
-	return cache_tag_names(tag_ids)
-
-
-def cache_tag_id_by_name(name):
+@get_one(CachePrefix.TAG_BY_NAME)
+def get_tag_id(name):
 	try:
 		tag_id = TagTab.objects.get(name=name).id
 	except TagTab.DoesNotExist:
 		return None
-	cache.set('tag_name_' + name, tag_id)
 	return tag_id
 
 
-def get_tag_id_by_name(name):
-	tag_id = cache.get('tag_name_' + name)
-	if tag_id:
-		return tag_id
-	return cache_tag_id_by_name(name)
+@get_many(CachePrefix.EVENT_DETAIL)
+def get_events(event_ids):
+	events = EventTab.objects.filter(id__in=event_ids).all()
+	values = {}
+	for event in events:
+		values[event.id] = model_to_dict(event)
+	return values
+
+
+def get_active_event_ids():
+	now = int(time.time())
+	event_ids = list(EventTab.objects.filter(start_date__lte=now, end_date__gte=now).values_list('id', flat=True))
+	return event_ids
 
 
 def get_event_ids_in_date_range(start_date, end_date):
@@ -134,19 +115,6 @@ def get_event_ids_in_date_range(start_date, end_date):
 	return ids
 
 
-def cache_event_ids_have_tag_id(tag_id):
-	event_ids = list(EventTagTab.objects.filter(tag_id=tag_id).values_list('event_id', flat=True))
-	cache.set('event_ids_have_tag_id_' + str(tag_id), event_ids)
-	return event_ids
-
-
 def get_event_ids_have_tag_id(tag_id):
-	event_ids = cache.get('event_ids_have_tag_id_' + str(tag_id))
-	if event_ids is not None:
-		return event_ids
-	return cache_event_ids_have_tag_id(tag_id)
-
-
-def get_event_infos(event_ids):
-	events = list(EventTab.objects.filter(id__in=event_ids).values('id', 'title', 'start_date', 'end_date', 'address'))
-	return events
+	event_ids = list(EventTagTab.objects.filter(tag_id=tag_id).values_list('event_id', flat=True))
+	return event_ids

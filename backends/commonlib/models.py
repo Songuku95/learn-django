@@ -10,7 +10,7 @@ from commonlib.constant import CommonStatus, Sex, UserRole
 
 # Reference: https://stackoverflow.com/questions/1737017/django-auto-now-and-auto-now-add
 class Model(models.Model):
-	created_at = models.PositiveIntegerField(editable=False)
+	created_at = models.PositiveIntegerField()
 	updated_at = models.PositiveIntegerField()
 
 	def save(self, *args, **kwargs):
