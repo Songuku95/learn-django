@@ -35,11 +35,11 @@ urlpatterns = [
 	url(r'^api/event/comment/get_ids/', comment_api.get_comment_ids),
 	url(r'^api/event/comment/get_details/', comment_api.get_comment_details),
 
-	url(r'api/event/like/update/', like_api.update_like),
-	url(r'api/event/like/get_ids/', like_api.get_event_likers),
+	url(r'^api/event/like/update/', like_api.update_like),
+	url(r'^api/event/like/get_ids/', like_api.get_event_likers),
 
-	url(r'api/event/participant/update/', participant_api.update_participant),
-	url(r'api/event/participant/get_ids/', participant_api.get_event_participants),
+	url(r'^api/event/participant/update/', participant_api.update_participant),
+	url(r'^api/event/participant/get_ids/', participant_api.get_event_participants),
 ]
 
 
