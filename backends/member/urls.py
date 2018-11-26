@@ -22,24 +22,25 @@ urlpatterns = [
 	url(r'^api/user/signup/$', user_api.signup),
 	url(r'^api/user/pre_login/$', user_api.pre_login),
 	url(r'^api/user/login/$', user_api.login),
+	url(r'^api/user/exchange_token/$', user_api.exchange_token),
 	url(r'^api/user/update_profile/$', user_api.update_profile),
 	url(r'^api/user/get_profile/$', user_api.get_profile),
 	url(r'^api/user/get_infos/$', user_api.get_infos),
 	url(r'^api/upload_image/$', user_api.upload_image),
 
-	url(r'^api/event/get_detail/', event_api.get_event_detail),
-	url(r'^api/event/get_ids/', event_api.search_event),
-	url(r'^api/event/get_infos/', event_api.get_event_infos),
+	url(r'^api/event/get_detail/$', event_api.get_event_detail),
+	url(r'^api/event/get_ids/$', event_api.search_event),
+	url(r'^api/event/get_infos/$', event_api.get_event_infos),
 
-	url(r'^api/event/comment/create/', comment_api.create),
-	url(r'^api/event/comment/get_ids/', comment_api.get_comment_ids),
-	url(r'^api/event/comment/get_details/', comment_api.get_comment_details),
+	url(r'^api/event/comment/create/$', comment_api.create),
+	url(r'^api/event/comment/get_ids/$', comment_api.get_comment_ids),
+	url(r'^api/event/comment/get_details/$', comment_api.get_comment_details),
 
-	url(r'^api/event/like/update/', like_api.update_like),
-	url(r'^api/event/like/get_ids/', like_api.get_event_likers),
+	url(r'^api/event/like/update/$', like_api.update_like),
+	url(r'^api/event/like/get_ids/$', like_api.get_event_likers),
 
-	url(r'^api/event/participant/update/', participant_api.update_participant),
-	url(r'^api/event/participant/get_ids/', participant_api.get_event_participants),
+	url(r'^api/event/participant/update/$', participant_api.update_participant),
+	url(r'^api/event/participant/get_ids/$', participant_api.get_event_participants),
 ]
 
 

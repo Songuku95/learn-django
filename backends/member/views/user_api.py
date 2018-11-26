@@ -141,6 +141,15 @@ update_profile_schema = {
 
 @require_POST
 @require_auth('member')
+def exchange_token(request):
+	user = userlib.get_user_by_id(request.user_id)
+	return SuccessResponse({
+		'token': auth.get_token(user)
+	})
+
+
+@require_POST
+@require_auth('member')
 @validate_schema(update_profile_schema)
 def update_profile(request, args):
 	userlib.update_profile(request.user_id, args)
